@@ -1,0 +1,13 @@
+.card-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.card {
+  flex: 0 0 calc(20% - 10px);
+  margin-right: 30px;
+  margin-top: 20px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}

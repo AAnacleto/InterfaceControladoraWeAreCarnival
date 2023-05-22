@@ -1,0 +1,34 @@
+main {
+  overflow-x: hidden;
+}
+
+li#menu{
+  font-size: 1.2rem;
+}
+
+li#menu:hover{
+  background-color: white;
+  font-weight: bolder;
+}
+
+li#submenu:hover{
+  background-color: whitesmoke;
+}
+
+ul#submenu{
+  margin-left: 30px;
+}
+
+.icone-menu{
+  color: white;
+  font-size: 1.5rem;
+}
+
+.icone-angle{
+  margin-left: 20px;
+  font-size: 1.4rem;
+}
+
+.card-img-top{
+  width: 30px;
+}
