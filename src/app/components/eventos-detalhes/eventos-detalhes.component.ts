@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { faPenSquare, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-eventos-detalhes',
@@ -8,13 +8,22 @@ import { faPenSquare, faTrash } from '@fortawesome/free-solid-svg-icons';
 })
 export class EventosDetalhesComponent implements OnInit {
 
-  fapen = faPenSquare;
-  trash = faTrash;
+
   operacao: string = '';
+
+  constructor(private router: Router){
+
+  }
 
   ngOnInit(){
     this.operacao = "Detalhar";
 
   }
+
+  voltarHome(){
+    this.router.navigate(['/home']);
+  }
+
+
 
 }

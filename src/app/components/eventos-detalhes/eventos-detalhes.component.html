@@ -1,87 +1,87 @@
 <app-layout>
   <div class="card">
     <div class="card-body">
-      <h5 class="card-title">{{operacao}} Evento</h5>
+      <h4 class="card-title">{{ operacao }} Evento</h4>
+      <br />
+      <br />
 
-      <!-- <div class="container">
-        <img src="../../../assets/imagens/1.png" alt="Imagem">
-
-      </div> -->
       <div class="row">
-          <div class="col-lg-4">
-            <div class="card" style="width: 20rem;">
-              <img src="../../../assets/imagens/1.png" class="card-img-top" alt="...">
-
-            </div>
+        <div class="container">
+          <img src="../../../assets/imagens/1.png" alt="Imagem" />
+          <div
+            class="input-container form-group col-lg-4"
+            style="margin-top: 260px"
+          >
+            <label for="data" class="control-label"
+              >Alterar imagem de divulgação:</label
+            >
+            <input type="file" class="form-control" accept="image/*" />
           </div>
-          <div class="col-lg-8">
-            <div class="form-group col-lg-12" style="margin-top: 120px;">
-              <label for="data" class="control-label"
-                >Alterar imagem de divulgação:</label
-              >
-              <input type="file" class="form-control" accept="image/*" />
-            </div>
-          </div>
+        </div>
+      </div>
+      <br />
+      <br />
+      <div class="row">
+        <div class="form-group col-lg-4">
+          <label
+            for="data"
+            class="control-label"
+            disabled="operacao=='Detalhar'"
+            >Nome do Evento:</label
+          >
+          <input type="text" class="form-control" />
+        </div>
+        <div class="form-group col-lg-1">
+          <label for="data" class="control-label">Data:</label>
+          <input type="date" class="form-control" />
+        </div>
+        <div class="form-group col-lg-1">
+          <label for="data" class="control-label">Horário de Saida:</label>
+          <input type="time" class="form-control" />
+        </div>
+        <div class="form-group col-lg-2">
+          <label for="data" class="control-label">Telefone para Contato:</label>
+          <input type="tel" class="form-control" />
+        </div>
+        <div class="form-group col-lg-4">
+          <label for="data" class="control-label">Local do Evento:</label>
+          <input type="text" class="form-control" />
+        </div>
+        <div class="form-group col-lg-3">
+          <label for="data" class="control-label">Endereço:</label>
+          <input type="text" class="form-control" />
+        </div>
+        <div class="form-group col-lg-1">
+          <label for="data" class="control-label">Número:</label>
+          <input type="text" class="form-control" />
+        </div>
+        <div class="form-group col-lg-4">
+          <label for="data" class="control-label">Ponto de Referência:</label>
+          <input type="text" class="form-control" />
+        </div>
+        <div class="form-group col-lg-2">
+          <label for="data" class="control-label">Cidade:</label>
+          <input type="text" class="form-control" />
+        </div>
+        <div class="form-group col-lg-2">
+          <label for="data" class="control-label">Bairro:</label>
+          <input type="text" class="form-control" />
+        </div>
       </div>
 
       <div class="row">
-          <div class="form-group col-lg-12">
-            <label for="data" class="control-label" disabled="operacao=='Detalhar'">Nome do Evento:</label>
-            <input type="text" class="form-control" />
-
-
-          </div>
-
-          <div class="form-group col-lg-4">
-            <label for="data" class="control-label">Data:</label>
-            <input type="date" class="form-control" />
-          </div>
-          <div class="form-group col-lg-4">
-            <label for="data" class="control-label">Horário de Saida:</label>
-            <input type="time" class="form-control" />
-          </div>
-          <div class="form-group col-lg-4">
-            <label for="data" class="control-label">Telefone para Contato:</label>
-            <input type="tel" class="form-control"/>
-          </div>
-          <div class="form-group col-lg-6">
-            <label for="data" class="control-label">Local do Evento:</label>
-            <input type="text" class="form-control" />
-          </div>
-          <div class="form-group col-lg-6">
-            <label for="data" class="control-label">Endereço:</label>
-            <input type="text" class="form-control" />
-          </div>
-          <div class="form-group col-lg-4">
-            <label for="data" class="control-label">Número:</label>
-            <input type="text" class="form-control" />
-          </div>
-          <div class="form-group col-lg-8">
-            <label for="data" class="control-label">Ponto de Referência:</label>
-            <input type="text" class="form-control" />
-          </div>
-          <div class="form-group col-lg-6">
-            <label for="data" class="control-label">Cidade:</label>
-            <input type="text" class="form-control" />
-          </div>
-          <div class="form-group col-lg-6">
-            <label for="data" class="control-label">Bairro:</label>
-            <input type="text" class="form-control" />
-          </div>
+        <div class="col-lg-12">
+          <button
+            type="button"
+            class="btn btn-primary"
+            style="margin-top: 20px"
+          >
+            Salvar Alteração
+          </button>
+          <button type="button" class="btn btn-primary button">Excluir</button>
+          <button type="button" class="btn btn-primary button" (click)="voltarHome()">Voltar</button>
         </div>
-
-          <div class="row">
-            <div class="col-lg-12">
-              <button type="button" class="btn btn-primary" style="margin-top: 20px;">Salvar Alteração</button>
-              <button type="button" class="btn btn-primary button">Excluir</button>
-              <button type="button" class="btn btn-primary button">Voltar</button>
-
-            </div>
-          </div>
-        </div>
-
       </div>
-
-
-
+    </div>
+  </div>
 </app-layout>
