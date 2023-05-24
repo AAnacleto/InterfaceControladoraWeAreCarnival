@@ -3,7 +3,7 @@
 
     <div class="container-fluid">
       <fa-icon [icon]="faBars" class="icone-menu" (click)="abrirMenu()" ></fa-icon>
-      <a class="navbar-brand mb-2 h1 title" style="color: white"
+      <a class="navbar-brand mb-2 h1 title" style="color: white;"
         >
         <img src="../../assets/imagens/frevo.png" class="card-img-top" alt="..." />
 
@@ -32,14 +32,14 @@
         style="background-color: #e9e9e9; height: 100vh; width: 30vh;">
 
       <li id="menu" class="nav-item">
-        <a class="nav-link" routerLink="/home">
+        <a class="nav-link" (click)="chamarRota(1)">
           <fa-icon class="icon" [icon]="faList"></fa-icon>
             Eventos
           </a>
       </li>
 
       <li id="menu" class="nav-item">
-        <a class="nav-link" (click)="chamarRota()">
+        <a class="nav-link" (click)="chamarRota(2)">
           <fa-icon class="icon" [icon]="faPlus"></fa-icon>
              Novo Evento
         </a>
@@ -47,7 +47,7 @@
       </li>
 
       <li id="menu" class="nav-item">
-        <a class="nav-link">
+        <a class="nav-link" (click)="chamarRota(3)">
           <fa-icon class="icon" [icon]="faCrash"></fa-icon>
              Dashboard
         </a>

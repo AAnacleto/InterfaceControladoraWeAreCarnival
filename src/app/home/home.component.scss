@@ -4,10 +4,12 @@
 }
 
 .card {
-  flex: 0 0 calc(20% - 10px);
-  margin-right: 30px;
+  flex: 0 0 calc(22% - 10px);
+  margin-right: 20px;
   margin-top: 20px;
   padding: 5px;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Define a sombra do cartão */
+
 }

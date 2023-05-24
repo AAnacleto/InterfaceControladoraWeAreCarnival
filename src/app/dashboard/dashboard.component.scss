@@ -1,0 +1,32 @@
+.card-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.card {
+  flex: 0 0 calc(30% - 10px);
+  margin-right: 30px;
+  margin-top: 20px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Define a sombra do cartão */
+  background: linear-gradient(to bottom, #007bff, #00bfff);
+
+
+}
+.card-title{
+  color: white;
+  font-weight: 500;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+
+}
+
+.card-text{
+  font-size: 3rem !important;
+  text-align: center;
+  color: white;
+  font-weight: bolder;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+
+}

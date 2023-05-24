@@ -1,0 +1,22 @@
+app-login{
+  height: 100%; /* Define a altura total da página */
+  margin: 0; /* Remove as margens padrão do body */
+}
+.container {
+  display: flex;
+  height: 100vh; /* Define a altura total da página */
+}
+
+.left-column {
+  flex-basis: 80%; /* Define a largura da primeira coluna (80% da tela) */
+  background-image: url('../../assets/imagens/carnaval.jpg');
+  background-size: cover;
+  background-position: center;
+
+  /* Outras propriedades de estilo para a primeira coluna */
+}
+
+.right-column {
+  flex-basis: 20%; /* Define a largura da segunda coluna (20% da tela) */
+  /* Outras propriedades de estilo para a segunda coluna */
+}

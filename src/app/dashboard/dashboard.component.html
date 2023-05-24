@@ -1,0 +1,14 @@
+<app-layout>
+  <div class="card-list">
+    <div class="card" style="width: 40rem" *ngFor="let item of dados">
+      <div class="card-body">
+        <h4 class="card-title">{{item.titulo}}</h4>
+        <p class="card-text">
+          {{item.valor}}
+        </p>
+        <!-- <a class="btn btn-primary">Mais Informações</a> -->
+      </div>
+    </div>
+   </div>
+</app-layout>
+
