@@ -6,7 +6,7 @@
       <br />
 
       <div class="row">
-        <div class="container">
+        <!-- <div class="container">
           <img src="../../../assets/imagens/1.png" alt="Imagem" />
           <div
             class="input-container form-group col-lg-4"
@@ -16,6 +16,13 @@
               >Alterar imagem de divulgação:</label
             >
             <input type="file" class="form-control" accept="image/*" />
+          </div>
+        </div> -->
+        <div class="form-group col-lg-4 mx-auto" >
+          <div class="card mx-auto" style="width: 30rem">
+            <label for="data" class="control-label">Imagem de Divulgação:</label>
+            <input type="file" class="form-control" accept="image/*" #file (change)="preview(file.files, $event)" />
+            <img [src]="imgUrl" class="card-img-top" *ngIf="imgUrl">
           </div>
         </div>
       </div>
@@ -31,23 +38,32 @@
           >
           <input type="text" class="form-control" />
         </div>
-        <div class="form-group col-lg-1">
+        <div class="form-group col-lg-4">
+          <label
+            for="data"
+            class="control-label"
+            disabled="operacao=='Detalhar'"
+            >Polo do Evento:</label
+          >
+          <input type="text" class="form-control" />
+        </div>
+        <div class="form-group col-lg-2">
           <label for="data" class="control-label">Data:</label>
           <input type="date" class="form-control" />
         </div>
-        <div class="form-group col-lg-1">
+        <div class="form-group col-lg-2">
           <label for="data" class="control-label">Horário de Saida:</label>
           <input type="time" class="form-control" />
         </div>
         <div class="form-group col-lg-2">
-          <label for="data" class="control-label">Telefone para Contato:</label>
-          <input type="tel" class="form-control" />
-        </div>
-        <div class="form-group col-lg-4">
-          <label for="data" class="control-label">Local do Evento:</label>
+          <label for="data" class="control-label">Dia da Semana:</label>
           <input type="text" class="form-control" />
         </div>
         <div class="form-group col-lg-3">
+          <label for="data" class="control-label">Local do Evento:</label>
+          <input type="text" class="form-control" />
+        </div>
+        <div class="form-group col-lg-6">
           <label for="data" class="control-label">Endereço:</label>
           <input type="text" class="form-control" />
         </div>
@@ -70,16 +86,20 @@
       </div>
 
       <div class="row">
-        <div class="col-lg-12">
+        <div class="col-lg-12" *ngIf="operacao=='Detalhar'">
           <button
             type="button"
             class="btn btn-primary"
             style="margin-top: 20px"
+
           >
             Salvar Alteração
           </button>
           <button type="button" class="btn btn-primary button">Excluir</button>
           <button type="button" class="btn btn-primary button" (click)="voltarHome()">Voltar</button>
+        </div>
+        <div class="col-lg-12" style="margin-top: 40px" *ngIf="operacao=='Cadastrar'">
+          <button type="button" class="btn btn-primary" (click)="salvarEvento()">Salvar Evento</button>
         </div>
       </div>
     </div>

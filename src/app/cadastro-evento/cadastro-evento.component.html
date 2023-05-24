@@ -9,51 +9,55 @@
       <div class="row">
         <div class="form-group col-lg-4">
           <label for="data" class="control-label">Nome do Evento:</label>
-          <input type="text" class="form-control" />
+          <input type="text" class="form-control" [(ngModel)]="evento.nome"/>
         </div>
         <div class="form-group col-lg-4">
-          <label for="data" class="control-label">Imagem de Divulgação:</label>
-          <input type="file" class="form-control" accept="image/*" />
+          <label for="data" class="control-label">Polo do Evento:</label>
+          <input type="text" class="form-control" [(ngModel)]="evento.polo" />
+        </div>
+        <div class="form-group col-lg-4 mx-auto" >
+          <div class="card mx-auto" style="width: 18rem">
+            <label for="data" class="control-label">Imagem de Divulgação:</label>
+            <input type="file" class="form-control" accept="image/*" #file (change)="preview(file.files, $event)" />
+            <img [src]="imgUrl" class="card-img-top" *ngIf="imgUrl">
+          </div>
         </div>
         <div class="form-group col-lg-2">
           <label for="data" class="control-label">Data:</label>
-          <input type="date" class="form-control" />
+          <input type="date" class="form-control" [(ngModel)]="evento.data"/>
         </div>
         <div class="form-group col-lg-2">
           <label for="data" class="control-label">Horário de Saida:</label>
-          <input type="time" class="form-control" />
+          <input type="time" class="form-control" [(ngModel)]="evento.horario"/>
         </div>
-        <div class="form-group col-lg-2">
-          <label for="data" class="control-label">Telefone para Contato:</label>
-          <input type="tel" class="form-control" />
-        </div>
+
         <div class="form-group col-lg-4">
           <label for="data" class="control-label">Local do Evento:</label>
-          <input type="text" class="form-control" />
+          <input type="text" class="form-control" [(ngModel)]="evento.nomeLocal" />
         </div>
         <div class="form-group col-lg-4">
           <label for="data" class="control-label">Endereço:</label>
-          <input type="text" class="form-control" />
+          <input type="text" class="form-control" [(ngModel)]="evento.endereco.nomeRua" />
         </div>
         <div class="form-group col-lg-2">
           <label for="data" class="control-label">Número:</label>
-          <input type="text" class="form-control" />
+          <input type="text" class="form-control" [(ngModel)]="evento.endereco.numero" />
         </div>
         <div class="form-group col-lg-4">
           <label for="data" class="control-label">Ponto de Referência:</label>
-          <input type="text" class="form-control" />
+          <input type="text" class="form-control" [(ngModel)]="evento.endereco.pontoReferencia"/>
         </div>
         <div class="form-group col-lg-2">
           <label for="data" class="control-label">Cidade:</label>
-          <input type="text" class="form-control" />
+          <input type="text" class="form-control" [(ngModel)]="evento.endereco.cidade"/>
         </div>
         <div class="form-group col-lg-2">
           <label for="data" class="control-label">Bairro:</label>
-          <input type="text" class="form-control" />
+          <input type="text" class="form-control" [(ngModel)]="evento.endereco.bairro"/>
         </div>
       </div>
       <div class="col-lg-12" style="margin-top: 40px">
-        <button type="button" class="btn btn-primary">Salvar Evento</button>
+        <button type="button" class="btn btn-primary" (click)="salvarEvento()">Salvar Evento</button>
       </div>
     </div>
   </div>

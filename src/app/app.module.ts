@@ -8,7 +8,8 @@ import { LayoutComponent } from './layout/layout.component';
 import { HomeComponent } from './home/home.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { EventosDetalhesComponent } from './components/eventos-detalhes/eventos-detalhes.component';
-import { EventosService } from './servico/eventos.service';
+import { FormsModule } from '@angular/forms';
+import { EventosService } from './shared/servico/eventos.service';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { EventosService } from './servico/eventos.service';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    FormsModule
   ],
   providers: [EventosService],
   bootstrap: [AppComponent]

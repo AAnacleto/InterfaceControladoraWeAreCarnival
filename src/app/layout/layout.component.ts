@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { faBars, faCashRegister, faList, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { Location } from '@angular/common';
+
 
 
 @Component({
@@ -17,6 +20,8 @@ export class LayoutComponent implements OnInit {
   faList= faList;
   faCrash= faCashRegister;
 
+  constructor(private router: Router, private location: Location){}
+
   ngOnInit(){
     console.log(this.submenu);
   }
@@ -28,5 +33,15 @@ export class LayoutComponent implements OnInit {
   abrirSubmenu(){
     this.submenu = !this.submenu;
   }
+
+  chamarRota() {
+    const rotaAtual = "/eventos/detalhes/new"; // Obtém a rota atual
+    this.router.navigateByUrl(rotaAtual) // Chama a rota atual
+      .then(() => {
+        this.location.go(rotaAtual); // Atualiza a URL da página
+        location.reload(); // Recarrega a página
+      });
+
+    }
 
 }
