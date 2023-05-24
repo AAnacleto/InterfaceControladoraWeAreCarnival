@@ -1,22 +1,25 @@
 app-login{
-  height: 100%; /* Define a altura total da página */
-  margin: 0; /* Remove as margens padrão do body */
+  height: 100%;
+  margin: 0;
 }
 .container {
   display: flex;
-  height: 100vh; /* Define a altura total da página */
-}
+  height: 100vh;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  .left-column {
+    flex-basis: 70%;
+    background-image: url('../../assets/imagens/carnaval.jpg');
+    background-size: cover;
+    background-position: center;
+  }
 
-.left-column {
-  flex-basis: 80%; /* Define a largura da primeira coluna (80% da tela) */
-  background-image: url('../../assets/imagens/carnaval.jpg');
-  background-size: cover;
-  background-position: center;
-
-  /* Outras propriedades de estilo para a primeira coluna */
-}
-
-.right-column {
-  flex-basis: 20%; /* Define a largura da segunda coluna (20% da tela) */
-  /* Outras propriedades de estilo para a segunda coluna */
+  .right-column {
+    padding: 2em;
+    flex-basis: 30%;
+    h2 {
+      text-align: center;
+    }
+  }
 }
