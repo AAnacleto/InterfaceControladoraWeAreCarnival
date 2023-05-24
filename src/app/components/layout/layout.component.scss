@@ -22,6 +22,7 @@ ul#submenu{
 .icone-menu{
   color: white;
   font-size: 1.5rem;
+  cursor: pointer;
 }
 
 .icone-angle{
@@ -31,4 +32,31 @@ ul#submenu{
 
 .card-img-top{
   width: 30px;
+}
+
+.flex-column, element.style {
+  min-height: 100% !important;
+}
+
+.nav-link {
+  cursor: pointer;
+}
+
+.title {
+  display: flex;
+  flex-direction: row;
+  margin: 0 !important;
+  .card-img-top {
+    filter: drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.75));
+    width: 2em;
+    height: 2em;
+    margin-right: 0.5em;
+  }
+  h3 {
+    margin: 0 !important;
+  }
+}
+
+.space-card {
+  margin: 0 auto;
 }
