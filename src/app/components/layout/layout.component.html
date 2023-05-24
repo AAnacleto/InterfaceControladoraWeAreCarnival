@@ -3,14 +3,10 @@
 
     <div class="container-fluid">
       <fa-icon [icon]="faBars" class="icone-menu" (click)="abrirMenu()" ></fa-icon>
-      <a class="navbar-brand mb-2 h1 title" style="color: white;"
-        >
+      <span class="navbar-brand mb-2 h1 title" style="color: white;">
         <img src="../../assets/imagens/frevo.png" class="card-img-top" alt="..." />
-
-        We Are Carnival
-
-        </a
-      >
+        <h3>We Are Carnival</h3>
+        </span>
       <form class="d-flex" role="search">
         <input
           class="form-control me-2"
@@ -57,7 +53,7 @@
       </ul>
     </div>
 
-    <div class="col-10">
+    <div class="col-10 space-card">
       <ng-content></ng-content>
     </div>
   </div>
