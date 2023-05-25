@@ -61,4 +61,9 @@ export class EventosDetalhesComponent implements OnInit {
   console.log(this.evento);
 }
 
+limparTudo(){
+  this.evento = new Eventos();
+  this.imgUrl = "";
+}
+
 }

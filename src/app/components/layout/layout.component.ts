@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import {
+  faArrowAltCircleLeft,
+  faArrowCircleLeft,
+  faArrowCircleRight,
   faBars,
   faCashRegister,
   faList,
@@ -21,7 +24,7 @@ export class LayoutComponent implements OnInit {
   faPlus = faPlus;
   faList = faList;
   faCrash = faCashRegister;
-  // rotaAtual : any;
+  faLogout = faArrowCircleRight;
 
   constructor(private router: Router, private location: Location) {}
 
@@ -47,6 +50,8 @@ export class LayoutComponent implements OnInit {
       rotaAtual = 'eventos/detalhes/new';
     } else if (rota === 3) {
       rotaAtual = 'dashboard';
+    }  else if (rota === 4) {
+      rotaAtual = 'login';
     }
 
     console.log(rotaAtual);

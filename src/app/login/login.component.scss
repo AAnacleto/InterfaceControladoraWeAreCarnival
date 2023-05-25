@@ -18,8 +18,79 @@ app-login{
   .right-column {
     padding: 2em;
     flex-basis: 30%;
+    background-color: #0d6efd;
     h2 {
       text-align: center;
     }
   }
 }
+
+// .card{
+//   margin-top: 35%;
+//   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+//   border-radius: 10px;
+
+  .logo{
+    justify-content: center;
+    text-align: center;
+
+  }
+  img{
+    width: 100px;
+  }
+
+  .form{
+    margin-top: 40%;
+  }
+
+  .card-title{
+    text-align: center;
+    font-weight: bold;
+    font-size: 2rem;
+    color: white;
+    text-transform: uppercase;
+  }
+
+  label{
+    font-size: 1.3rem;
+    font-weight: 700;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    color: white;
+
+  }
+
+  .form-group{
+    margin-top: 30px;
+
+    input{
+      border: 2px solid #0d6efd;
+      font-weight: 500;
+      font-size: 1.6rem;
+
+    }
+  }
+
+  .buttonEnter{
+    text-align: center;
+    button{
+      margin-top: 60px;
+      text-transform: uppercase;
+      font-weight: 700;
+      background-color: white;
+      color: #0d6efd;
+      width: 100%;
+    }
+  }
+
+  .textButton{
+    margin-top: 30px !important;
+
+    a{
+      cursor: pointer;
+      color: white;
+      font-size: 1rem;
+    }
+
+  }
+
+// }

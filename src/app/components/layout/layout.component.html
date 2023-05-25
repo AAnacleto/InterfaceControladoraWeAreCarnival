@@ -13,9 +13,15 @@
           type="search"
           placeholder="Encontre o evento"
           aria-label="Search"
+          id="search"
         />
         <button class="btn btn-light" type="submit">Procurar</button>
       </form>
+      <fa-icon [icon]="faLogout" class="icone-menu" (click)="chamarRota(4)" ></fa-icon>
+
+      <!-- <a class="navbar-brand mb-2 h1 title" style="color: white; cursor: pointer" (click)="chamarRota(4)">
+       Log out
+      </a> -->
     </div>
   </nav>
 </header>

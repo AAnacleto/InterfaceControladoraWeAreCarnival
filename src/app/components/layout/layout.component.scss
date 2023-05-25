@@ -21,7 +21,7 @@ ul#submenu{
 
 .icone-menu{
   color: white;
-  font-size: 1.5rem;
+  font-size: 1.7rem;
   cursor: pointer;
 }
 
@@ -55,6 +55,10 @@ ul#submenu{
   h3 {
     margin: 0 !important;
   }
+}
+
+input#search{
+  width: 600px;
 }
 
 .space-card {
