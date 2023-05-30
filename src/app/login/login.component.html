@@ -1,28 +1,65 @@
 <div class="container">
-    <div class="left-column">
+  <div class="left-column"></div>
+  <div class="right-column">
+    <div class="form">
+      <h5 class="card-title">We Are Carnival</h5>
+      <form>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Email:</label>
+          <input
+            type="email"
+            class="form-control"
+            id="exampleInputEmail1"
+            aria-describedby="emailHelp"
+          />
+          <small id="emailHelp" class="form-text text-muted"></small>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">Senha:</label>
+          <input
+            type="password"
+            class="form-control"
+            id="exampleInputPassword1"
+          />
+        </div>
+        <div class="buttonEnter">
+          <button
+            type="button"
+            class="btn btn-primary btn-lg btn-block"
+            routerLink="/home"
+          >
+            Login
+          </button>
+        </div>
+        <div class="textButton">
+          <p><a>Esqueceu sua senha ?</a></p>
+        </div>
+      </form>
+      <div class="content">
+        <p>Senha precisa conter</p>
+        <ul class="requirement-list">
+          <li>
+            <i class="fa-solid fa-circle"></i>
+            <span>Pelo menos 8 caracteres</span>
+          </li>
+          <li>
+            <i class="fa-solid fa-circle"></i>
+            <span>Pelo menos 1 numero (0...9)</span>
+          </li>
+          <li>
+            <i class="fa-solid fa-circle"></i>
+            <span>Pelo menos 1 letra minúscula (a...z)</span>
+          </li>
+          <li>
+            <i class="fa-solid fa-circle"></i>
+            <span>Pelo menos 1 símbolo especial (!...$)</span>
+          </li>
+          <li>
+            <i class="fa-solid fa-circle"></i>
+            <span>Pelo menos 1 letra maiúscula</span>
+          </li>
+        </ul>
+      </div>
     </div>
-    <div class="right-column">
-       <div class="form">
-            <h5 class="card-title">We Are Carnival</h5>
-            <form>
-              <div class="form-group">
-                <label for="exampleInputEmail1">Email:</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                <small id="emailHelp" class="form-text text-muted"></small>
-              </div>
-              <div class="form-group">
-                <label for="exampleInputPassword1">Senha:</label>
-                <input type="password" class="form-control" id="exampleInputPassword1">
-              </div>
-              <div class="buttonEnter">
-                <button type="button" class="btn btn-primary btn-lg btn-block " routerLink="/home">Login</button>
-             </div>
-             <div class="textButton">
-               <p><a>Esqueceu sua senha ?</a></p>
-             </div>
-
-            </form>
-          </div>
-    </div>
+  </div>
 </div>
-
