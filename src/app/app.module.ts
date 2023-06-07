@@ -13,6 +13,7 @@ import { EventosService } from './shared/servico/eventos.service';
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HttpClientModule } from '@angular/common/http';
+import { CadastroUsuarioComponent } from './cadastro-usuario/cadastro-usuario.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { HttpClientModule } from '@angular/common/http';
     HomeComponent,
     EventosDetalhesComponent,
     LoginComponent,
-    DashboardComponent
+    DashboardComponent,
+    CadastroUsuarioComponent,
   ],
   imports: [
     BrowserModule,

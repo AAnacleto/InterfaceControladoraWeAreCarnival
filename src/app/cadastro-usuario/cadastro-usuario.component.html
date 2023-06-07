@@ -1,0 +1,47 @@
+<h4 class="text-center">Registre-se</h4>
+
+<form class="form mt-4" [formGroup]="novoUsuarioForm">
+  <label for="email">Email</label>
+  <input
+    placeholder="e-mail"
+    class="form-control"
+    formControlName="email"
+    id="email"
+  />
+  <div
+    class="form-group"
+    *ngIf="
+  novoUsuarioForm.get('email')?.errors?.['required'] &&
+  novoUsuarioForm.get('email')?.touched"
+  >Email obrigatório</div>
+
+  <input
+    type="text"
+    placeholder="Nome Completo"
+    class="form-control"
+    formControlName="nome"
+    id="nome"
+  />
+  <div
+    class="form-group"
+    *ngIf="
+      novoUsuarioForm.get('nome')?.errors &&
+      novoUsuarioForm.get('nome')?.touched
+    "
+  >Nome obrigatório</div>
+  <input
+  type="password"
+  placeholder="Senha"
+  class="form-control"
+  formControlName="senha"
+  id="senha"
+  />
+  <div
+    class="form-group"
+    *ngIf="novoUsuarioForm.get('senha')?.errors?.['minlength'] && novoUsuarioForm.get('senha')?.touched"
+    mensagem="Senha deve ser diferente do usuário"
+  >Minimo de 8 caracteres</div>
+  <button (click)="cadastrar()" class="btn btn-primary btn-block">Cadastro</button>
+</form>
+
+<p>Já é um usuário? <a [routerLink]="['']">Faça login</a></p>

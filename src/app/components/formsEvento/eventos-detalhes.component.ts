@@ -64,7 +64,7 @@ export class EventosDetalhesComponent implements OnInit {
     reader.readAsDataURL(files[0]);
     reader.onload = (_event) => {
       this.imgUrl = reader.result;
-      this.evento.imagem = this.removeSymbolsFromString(this.imgUrl);
+      // this.evento.imagem = this.removeSymbolsFromString(this.imgUrl);
     };
   }
 
