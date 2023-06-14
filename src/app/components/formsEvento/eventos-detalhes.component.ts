@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Eventos } from 'src/app/shared/models/Eventos';
 import {
@@ -7,6 +7,8 @@ import {
   ref,
   uploadBytes,
 } from '@angular/fire/storage';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
+
 
 @Component({
   selector: 'app-eventos-detalhes',
@@ -20,6 +22,11 @@ export class EventosDetalhesComponent implements OnInit {
   imgUrl: any;
   evento: Eventos = new Eventos();
   percentage = 0;
+  carregando: boolean = true;
+  fatimes = faTimes;
+
+  @ViewChild('file', { static: false }) inputArquivoRef!: ElementRef<HTMLInputElement>;
+
 
   diaSemana = [
     {"id": 1 ,"nome": "Quinta-feira"},
@@ -92,12 +99,21 @@ export class EventosDetalhesComponent implements OnInit {
       .then((url) => {
         console.log('URL da foto:', url);
         this.evento.imagem = url;
+        if(this.evento.imagem != ""){
+          this.imgUrl = "";
+        }
       })
       .catch((error) => {
         console.log('Erro ao obter a URL da foto:', error);
       });
   }
 
+  limparImagem(){
+    this.evento.imagem = "";
+    this.imgUrl = '';
+    this.imagePath = "";
+    this.inputArquivoRef.nativeElement.value = '';
+  }
 
 
   salvarEvento() {

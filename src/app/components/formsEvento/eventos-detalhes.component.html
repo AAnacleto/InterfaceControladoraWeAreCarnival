@@ -6,16 +6,35 @@
       <br />
 
       <div class="row">
-        <div class="form-group col-lg-4 mx-auto" >
+        <div class="form-group col-lg-4 mx-auto">
           <div class="card mx-auto" style="width: 30rem">
-            <label for="data" class="control-label">Imagem de Divulgação:</label>
-            <input type="file" class="form-control" accept="image/*" #file (change)="preview(file.files, $event)" multiple/>
-            <img [src]="imgUrl" class="card-img-top" *ngIf="imgUrl">
-            <!-- <a [href]="this.evento.imagem"> <img [src]="this.evento.imagem" class="card-img-top"> </a> -->
+            <label for="data" class="control-label"
+              >Imagem de Divulgação:</label
+            >
+            <input
+              type="file"
+              class="form-control"
+              accept="image/*"
+              #file
+              (change)="preview(file.files, $event)"
+              multiple
+            />
+            <a [href]="this.evento.imagem">
+              <img [src]="this.evento.imagem" class="card-img-top" />
 
+              <div
+                class="spinner-border"
+                id="spinner"
+                role="status"
+                *ngIf="imgUrl"
+              >
+                <span class="visually-hidden">Loading...</span>
+              </div>
+            </a>
           </div>
         </div>
       </div>
+
       <br />
       <br />
       <div class="row">
@@ -35,23 +54,29 @@
             disabled="operacao=='Detalhar'"
             >Polo do Evento:</label
           >
-          <input type="text" class="form-control" [(ngModel)]="evento.polo"/>
+          <input type="text" class="form-control" [(ngModel)]="evento.polo" />
         </div>
         <div class="form-group col-lg-2">
           <label for="data" class="control-label">Data:</label>
-          <input type="date" class="form-control" [(ngModel)]="evento.data"/>
+          <input type="date" class="form-control" [(ngModel)]="evento.data" />
         </div>
         <div class="form-group col-lg-2">
           <label for="data" class="control-label">Horário de Saida:</label>
-          <input type="time" class="form-control" [(ngModel)]="evento.horario" />
+          <input
+            type="time"
+            class="form-control"
+            [(ngModel)]="evento.horario"
+          />
         </div>
 
         <div class="form-group col-lg-2">
           <label for="data" class="control-label">Dia da Semana:</label>
-           <select class="form-control" [(ngModel)]="evento.diaSemana">
+          <select class="form-control" [(ngModel)]="evento.diaSemana">
             <option selected [ngValue]="null">Selecione o dia da semana</option>
-            <option *ngFor="let dia of diaSemana" [ngValue]="dia.nome">{{dia.nome}}</option>
-           </select>
+            <option *ngFor="let dia of diaSemana" [ngValue]="dia.nome">
+              {{ dia.nome }}
+            </option>
+          </select>
         </div>
 
         <!-- <select class="form-control">
@@ -62,47 +87,98 @@
 
         <div class="form-group col-lg-3">
           <label for="data" class="control-label">Local do Evento:</label>
-          <input type="text" class="form-control" [(ngModel)]="evento.nomeLocal"/>
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="evento.nomeLocal"
+          />
         </div>
         <div class="form-group col-lg-6">
           <label for="data" class="control-label">Endereço:</label>
-          <input type="text" class="form-control" [(ngModel)]="evento.endereco.nomeRua"/>
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="evento.endereco.nomeRua"
+          />
         </div>
         <div class="form-group col-lg-1">
           <label for="data" class="control-label">Número:</label>
-          <input type="text" class="form-control" [(ngModel)]="evento.endereco.numero"/>
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="evento.endereco.numero"
+          />
         </div>
         <div class="form-group col-lg-4">
           <label for="data" class="control-label">Ponto de Referência:</label>
-          <input type="text" class="form-control" [(ngModel)]="evento.endereco.pontoReferencia"/>
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="evento.endereco.pontoReferencia"
+          />
         </div>
         <div class="form-group col-lg-2">
           <label for="data" class="control-label">Cidade:</label>
-          <input type="text" class="form-control" [(ngModel)]="evento.endereco.cidade" />
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="evento.endereco.cidade"
+          />
         </div>
         <div class="form-group col-lg-2">
           <label for="data" class="control-label">Bairro:</label>
-          <input type="text" class="form-control" [(ngModel)]="evento.endereco.bairro" />
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="evento.endereco.bairro"
+          />
         </div>
       </div>
 
       <div class="row">
-        <div class="col-lg-12" *ngIf="operacao=='Detalhar'">
+        <div class="col-lg-12" *ngIf="operacao == 'Detalhar'">
           <button
             type="button"
             class="btn btn-primary"
             style="margin-top: 20px"
-
           >
             Salvar Alteração
           </button>
           <button type="button" class="btn btn-primary button">Excluir</button>
-          <button type="button" class="btn btn-primary button" (click)="voltarHome()">Voltar</button>
+          <button
+            type="button"
+            class="btn btn-primary button"
+            (click)="voltarHome()"
+          >
+            Voltar
+          </button>
         </div>
-        <div class="col-lg-12" style="margin-top: 40px" *ngIf="operacao=='Cadastrar'">
-          <button type="button" class="btn btn-primary button" (click)="salvarEvento()">Salvar Evento</button>
-          <button type="button" class="btn btn-secondary button" (click)="limparTudo()">Limpar</button>
-
+        <div
+          class="col-lg-12"
+          style="margin-top: 40px"
+          *ngIf="operacao == 'Cadastrar'"
+        >
+          <button
+            type="button"
+            class="btn btn-primary button"
+            (click)="salvarEvento()"
+          >
+            Salvar Evento
+          </button>
+          <button
+            type="button"
+            class="btn btn-secondary button"
+            (click)="limparImagem()"
+          >
+            Limpar Imagem
+          </button>
+          <button
+            type="button"
+            class="btn btn-secondary button"
+            (click)="limparTudo()"
+          >
+            Limpar
+          </button>
         </div>
       </div>
     </div>
