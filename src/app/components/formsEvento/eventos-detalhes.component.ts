@@ -1,13 +1,9 @@
-import { ImageUpload } from './../../shared/models/Imagem';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Eventos } from 'src/app/shared/models/Eventos';
-import { ImagemService } from 'src/app/shared/servico/imagem.service';
 import {
   Storage,
   getDownloadURL,
-  list,
-  listAll,
   ref,
   uploadBytes,
 } from '@angular/fire/storage';
@@ -23,7 +19,6 @@ export class EventosDetalhesComponent implements OnInit {
   imagePath: any;
   imgUrl: any;
   evento: Eventos = new Eventos();
-  imagemUpload?: ImageUpload;
   percentage = 0;
 
   diaSemana = [
@@ -39,7 +34,6 @@ export class EventosDetalhesComponent implements OnInit {
   constructor(
     private router: Router,
     private routeActivated: ActivatedRoute,
-    private imagemService: ImagemService,
     private storage: Storage
   ) {}
 
