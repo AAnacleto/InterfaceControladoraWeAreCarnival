@@ -7,13 +7,15 @@
         <img src="../../assets/imagens/frevo.png" class="card-img-top" alt="..." />
         <h3>We Are Carnival</h3>
         </span>
-      <form class="d-flex" role="search">
+      <form class="d-flex" role="search" (ngSubmit)="pesquisar()">
         <input
           class="form-control me-2"
           type="search"
           placeholder="Encontre o evento"
           aria-label="Search"
           id="search"
+          name="nome"
+          [(ngModel)]="nome"
         />
         <button class="btn btn-light" type="submit">Procurar</button>
       </form>

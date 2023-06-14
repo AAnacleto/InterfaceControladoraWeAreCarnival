@@ -5,6 +5,7 @@ import { HomeComponent } from './home/home.component';
 import { EventosDetalhesComponent } from './components/formsEvento/eventos-detalhes.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
+import { CadastroUsuarioComponent } from './cadastro-usuario/cadastro-usuario.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -18,6 +19,7 @@ const routes: Routes = [
     ]
   },
   { path: 'dashboard', component: DashboardComponent },
+  { path: 'cadastrousuario', component: CadastroUsuarioComponent}
 
 
 

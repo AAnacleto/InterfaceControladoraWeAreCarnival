@@ -10,6 +10,9 @@ import {
   faPlus,
 } from '@fortawesome/free-solid-svg-icons';
 import { Location } from '@angular/common';
+import { FormControl, FormGroup } from '@angular/forms';
+import { EventosService } from 'src/app/shared/servico/eventos.service';
+import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-layout',
@@ -19,15 +22,25 @@ import { Location } from '@angular/common';
 export class LayoutComponent implements OnInit {
   menu: boolean = true;
   submenu: boolean = false;
-
+  searchForm: FormGroup = new FormGroup({
+    search: new FormControl('')
+  });
+  public evento: Array<any> = [];
   faBars = faBars;
   faPlus = faPlus;
   faList = faList;
   faCrash = faCashRegister;
   faLogout = faArrowCircleRight;
+  nome = '';
+  constructor(private router: Router, private location: Location, private service: EventosService) {}
+  pesquisar() {
+    if(this.nome) {
+      this.router.navigate(['home'], {queryParams: {nome: this.nome}})
+      return;
+    }
 
-  constructor(private router: Router, private location: Location) {}
-
+    this.router.navigate(['home'])
+  }
   ngOnInit() {
     console.log(this.submenu);
   }

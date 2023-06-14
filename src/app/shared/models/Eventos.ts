@@ -1,4 +1,5 @@
 import { Endereco } from './Endereco';
+
 export class Eventos{
     id: string = "";
     nome : string = "";
@@ -7,7 +8,12 @@ export class Eventos{
     nomeLocal: string = "";
     imagem: string = "";
     data: string = "";
-    horario: string = "";
+    horarioSaida: string = "";
     diaSemana: string = "";
     favoritos: boolean = false;
+}
+
+export class Mensagem{
+  status: string = '';
+  mensagem: string = '';
 }

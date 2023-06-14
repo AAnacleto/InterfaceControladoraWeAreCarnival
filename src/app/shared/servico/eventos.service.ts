@@ -1,37 +1,56 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Eventos } from '../models/Eventos';
+import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
-
+const API = environment.apiURL;
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class EventosService {
+  constructor(private http: HttpClient) {}
 
-  constructor(private http: HttpClient) { }
 
-  url: string = 'http://localhost:8080/wearecarnival/eventos/';
+  criarEvento(evento: Eventos): Observable<Eventos> {
+    return this.http.post<Eventos>(API + '/eventos/save', evento);
+  }
+  editarEvento(evento: Eventos): Observable<Eventos> {
+    const url = API + '/eventos/update/' + evento.id;
+    return this.http.put<Eventos>(url, evento);
+  }
 
- buscarEventoPorId(id: any){
-    return this.http.get(this.url + 'find/byId'+ id)
- }
+  excluirEvento(id: string): Observable<Eventos> {
+    const url = API + '/eventos/delete/' + id;
+    return this.http.delete<Eventos>(url);
+  }
 
- buscarTodosEventos(){
-  return this.http.get(this.url + 'find/all');
- }
+  buscarPorId(id: string): Observable<Eventos> {
+    const url = API + '/eventos/find/byId/' + id;
+    return this.http.get<Eventos>(url);
+  }
 
- salvarEvento(evento: Eventos){
-  return this.http.post(this.url + 'save', evento);
- }
+  pesquisarEvento(nome: string) : Observable<any> {
+    return this.http.get<Eventos>(`${API}/eventos/find/${nome}`);
+  }
 
- editarEvento(evento: Eventos){
-  return this.http.put(this.url + 'update', evento);
+  listarTudo(): Observable<Eventos[]> {
+    return this.http.get<Eventos[]>(API + '/eventos/find/all');
+  }
 
- }
+  listar(pagina: number, filtro: string): Observable<Eventos[]> {
+    const itensPorPagina = 6;
 
- excluirEvento(id: any){
-  return this.http.delete(this.url + 'delete/' + id);
+    let params = new HttpParams()
+      .set('_page', pagina)
+      .set('_limit', itensPorPagina);
 
- }
+      if(filtro.trim().length > 2) {
+        params = params.set('q', filtro);
+      }
+
+    return this.http.get<Eventos[]>(API, { params });
+  }
+
 
 }

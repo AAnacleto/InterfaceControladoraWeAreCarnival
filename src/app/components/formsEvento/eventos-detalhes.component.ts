@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Eventos } from 'src/app/shared/models/Eventos';
+import { EventosService } from 'src/app/shared/servico/eventos.service';
 import {
   Storage,
   getDownloadURL,
@@ -28,6 +29,14 @@ export class EventosDetalhesComponent implements OnInit {
   @ViewChild('file', { static: false }) inputArquivoRef!: ElementRef<HTMLInputElement>;
 
 
+  constructor(
+    private router: Router,
+    private routeActivated: ActivatedRoute,
+    private service: EventosService,
+    private storage: Storage
+  ) {}
+
+
   diaSemana = [
     {"id": 1 ,"nome": "Quinta-feira"},
     {"id": 2 ,"nome": "Sexta-feira"},
@@ -38,20 +47,24 @@ export class EventosDetalhesComponent implements OnInit {
     {"id": 7 ,"nome": "Quarta-feira de Cinzas"}
   ]
 
-  constructor(
-    private router: Router,
-    private routeActivated: ActivatedRoute,
-    private storage: Storage
-  ) {}
 
   ngOnInit() {
     this.parametroRota = this.routeActivated.snapshot.params['id'];
-    this.operacao = 'Detalhar';
+
     if (this.parametroRota === 'new') {
       this.operacao = 'Cadastrar';
+
+    } if(this.parametroRota != 'new') {
+      this.operacao = 'Detalhar';
+      this.buscarPorId(this.parametroRota);
     }
     console.log(this.parametroRota);
   }
+
+  // salvarEvento() {
+
+  //   this.service.salvarEvento(this.evento);
+  // }
 
   voltarHome() {
     this.router.navigate(['/home']);
@@ -92,6 +105,13 @@ export class EventosDetalhesComponent implements OnInit {
     };
   }
 
+  buscarPorId(id: string) {
+    return this.service.buscarPorId(id).subscribe((data) => {
+      this.evento = data as Eventos[][0];
+      console.log(this.evento);
+    });
+  }
+
   getImageByName(imageName: string) {
     const imageRef = ref(this.storage, `images/${imageName}`);
 
@@ -107,21 +127,39 @@ export class EventosDetalhesComponent implements OnInit {
         console.log('Erro ao obter a URL da foto:', error);
       });
   }
+  criarEvento() {
+    this.service.criarEvento(this.evento).subscribe(() => {
+      this.router.navigate(['home']);
+      console.log(this.evento);
+    });
+  }
 
   limparImagem(){
     this.evento.imagem = "";
     this.imgUrl = '';
     this.imagePath = "";
     this.inputArquivoRef.nativeElement.value = '';
+
   }
 
+  editarEvento() {
+    this.service.editarEvento(this.evento).subscribe(() => {
+      this.router.navigate(['home']);
+      console.log(this.evento)
+    })
+  }
 
-  salvarEvento() {
-    console.log(this.evento);
+  excluirEvento() {
+    if(this.evento.id) {
+      this.service.excluirEvento(this.evento.id).subscribe(() => {
+        this.router.navigate(['home']);
+      })
+    }
   }
 
   limparTudo() {
     this.evento = new Eventos();
     this.imgUrl = '';
   }
+
 }

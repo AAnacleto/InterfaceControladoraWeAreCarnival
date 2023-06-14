@@ -8,10 +8,12 @@ import { LayoutComponent } from './components/layout/layout.component';
 import { HomeComponent } from './home/home.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { EventosDetalhesComponent } from './components/formsEvento/eventos-detalhes.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EventosService } from './shared/servico/eventos.service';
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { HttpClientModule } from '@angular/common/http';
+import { CadastroUsuarioComponent } from './cadastro-usuario/cadastro-usuario.component';
 import { provideFirebaseApp, initializeApp  } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { provideStorage,getStorage } from '@angular/fire/storage';
@@ -36,13 +38,16 @@ const firebaseConfig = {
     HomeComponent,
     EventosDetalhesComponent,
     LoginComponent,
-    DashboardComponent
+    DashboardComponent,
+    CadastroUsuarioComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FontAwesomeModule,
     FormsModule,
+    HttpClientModule,
+    ReactiveFormsModule,
     provideFirebaseApp(() => initializeApp(firebaseConfig)),
     provideFirestore(() => getFirestore()),
     provideStorage(() => getStorage())
