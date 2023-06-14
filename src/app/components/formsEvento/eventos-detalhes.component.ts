@@ -26,6 +26,16 @@ export class EventosDetalhesComponent implements OnInit {
   imagemUpload?: ImageUpload;
   percentage = 0;
 
+  diaSemana = [
+    {"id": 1 ,"nome": "Quinta-feira"},
+    {"id": 2 ,"nome": "Sexta-feira"},
+    {"id": 3 ,"nome": "Sábado de Carnaval"},
+    {"id": 4 ,"nome": "Domingo de Carnaval"},
+    {"id": 5 ,"nome": "Segunda de Carnaval"},
+    {"id": 6 ,"nome": "Terça-feira Gorda"},
+    {"id": 7 ,"nome": "Quarta-feira de Cinzas"}
+  ]
+
   constructor(
     private router: Router,
     private routeActivated: ActivatedRoute,
