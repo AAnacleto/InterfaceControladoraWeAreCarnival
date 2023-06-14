@@ -9,8 +9,10 @@
         <div class="form-group col-lg-4 mx-auto" >
           <div class="card mx-auto" style="width: 30rem">
             <label for="data" class="control-label">Imagem de Divulgação:</label>
-            <input type="file" class="form-control" accept="image/*" #file (change)="preview(file.files, $event)" />
+            <input type="file" class="form-control" accept="image/*" #file (change)="preview(file.files, $event)" multiple/>
             <img [src]="imgUrl" class="card-img-top" *ngIf="imgUrl">
+            <!-- <a [href]="this.evento.imagem"> <img [src]="this.evento.imagem" class="card-img-top"> </a> -->
+
           </div>
         </div>
       </div>

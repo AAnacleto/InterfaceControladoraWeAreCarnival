@@ -1,69 +1,107 @@
+import { ImageUpload } from './../../shared/models/Imagem';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Eventos } from 'src/app/shared/models/Eventos';
+import { ImagemService } from 'src/app/shared/servico/imagem.service';
+import {
+  Storage,
+  getDownloadURL,
+  list,
+  listAll,
+  ref,
+  uploadBytes,
+} from '@angular/fire/storage';
 
 @Component({
   selector: 'app-eventos-detalhes',
   templateUrl: './eventos-detalhes.component.html',
-  styleUrls: ['./eventos-detalhes.component.scss']
+  styleUrls: ['./eventos-detalhes.component.scss'],
 })
 export class EventosDetalhesComponent implements OnInit {
-
-
   operacao: string = '';
   parametroRota: any;
   imagePath: any;
   imgUrl: any;
   evento: Eventos = new Eventos();
+  imagemUpload?: ImageUpload;
+  percentage = 0;
 
+  constructor(
+    private router: Router,
+    private routeActivated: ActivatedRoute,
+    private imagemService: ImagemService,
+    private storage: Storage
+  ) {}
 
-  constructor(private router: Router, private routeActivated: ActivatedRoute){
-
-  }
-
-  ngOnInit(){
+  ngOnInit() {
     this.parametroRota = this.routeActivated.snapshot.params['id'];
-    this.operacao = "Detalhar";
-    if(this.parametroRota === 'new'){
-      this.operacao = "Cadastrar";
+    this.operacao = 'Detalhar';
+    if (this.parametroRota === 'new') {
+      this.operacao = 'Cadastrar';
     }
     console.log(this.parametroRota);
-
   }
 
-  voltarHome(){
+  voltarHome() {
     this.router.navigate(['/home']);
   }
 
-
-
-  preview(files : any, event : any){
-    if(files.length ===0){
-     return;
-    }
-
-    let mimeType = files[0].type;
-    if(mimeType.match(/image\/*/) == null){
+  preview(files: any, event: any) {
+    if (files.length === 0) {
       return;
     }
 
-    let reader = new FileReader();
+    const mimeType = files[0].type;
+    if (!mimeType.match(/image\/*/)) {
+      return;
+    }
+
+    const reader = new FileReader();
     this.imagePath = files;
     reader.readAsDataURL(files[0]);
     reader.onload = (_event) => {
-     this.imgUrl = reader.result;
-     this.evento.imagem = this.imgUrl;
-    }
+      this.imgUrl = reader.result;
+      console.log(this.imgUrl);
 
+      const file = files[0].name;
+
+      const uploadOptions = {
+        contentType: 'image/jpeg',
+      };
+
+      const imgRef = ref(this.storage, `images/${file}`);
+      uploadBytes(imgRef, files[0], uploadOptions)
+        .then(() => {
+          console.log('Upload concluído com sucesso');
+          this.getImageByName(file);
+        })
+        .catch((err) => {
+          console.log('Erro ao fazer upload:', err);
+        });
+    };
   }
 
- salvarEvento(){
-  console.log(this.evento);
-}
+  getImageByName(imageName: string) {
+    const imageRef = ref(this.storage, `images/${imageName}`);
 
-limparTudo(){
-  this.evento = new Eventos();
-  this.imgUrl = "";
-}
+    getDownloadURL(imageRef)
+      .then((url) => {
+        console.log('URL da foto:', url);
+        this.evento.imagem = url;
+      })
+      .catch((error) => {
+        console.log('Erro ao obter a URL da foto:', error);
+      });
+  }
 
+
+
+  salvarEvento() {
+    console.log(this.evento);
+  }
+
+  limparTudo() {
+    this.evento = new Eventos();
+    this.imgUrl = '';
+  }
 }
