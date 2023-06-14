@@ -1,8 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Eventos } from 'src/app/shared/models/Eventos';
 import { EventosService } from 'src/app/shared/servico/eventos.service';
+import {
+  Storage,
+  getDownloadURL,
+  ref,
+  uploadBytes,
+} from '@angular/fire/storage';
 
 @Component({
   selector: 'app-eventos-detalhes',
@@ -15,31 +20,40 @@ export class EventosDetalhesComponent implements OnInit {
   imagePath: any;
   imgUrl: any;
   evento: Eventos = new Eventos();
+  percentage = 0;
 
   constructor(
     private router: Router,
     private routeActivated: ActivatedRoute,
-    private service: EventosService
+    private service: EventosService,
+    private storage: Storage
   ) {}
+
+
+  diaSemana = [
+    {"id": 1 ,"nome": "Quinta-feira"},
+    {"id": 2 ,"nome": "Sexta-feira"},
+    {"id": 3 ,"nome": "Sábado de Carnaval"},
+    {"id": 4 ,"nome": "Domingo de Carnaval"},
+    {"id": 5 ,"nome": "Segunda de Carnaval"},
+    {"id": 6 ,"nome": "Terça-feira Gorda"},
+    {"id": 7 ,"nome": "Quarta-feira de Cinzas"}
+  ]
+
 
   ngOnInit() {
     this.parametroRota = this.routeActivated.snapshot.params['id'];
-    this.operacao = 'Detalhar';
 
-    if (this.parametroRota !== 'new') {
-      this.buscarPorId(this.parametroRota);
-    }
     if (this.parametroRota === 'new') {
       this.operacao = 'Cadastrar';
+
+    } if(this.parametroRota != 'new') {
+      this.operacao = 'Detalhar';
+      this.buscarPorId(this.parametroRota);
     }
     console.log(this.parametroRota);
   }
-  criarEvento() {
-    this.service.criarEvento(this.evento).subscribe(() => {
-      this.router.navigate(['home']);
-      console.log(this.evento);
-    });
-  }
+
   // salvarEvento() {
 
   //   this.service.salvarEvento(this.evento);
@@ -54,27 +68,34 @@ export class EventosDetalhesComponent implements OnInit {
       return;
     }
 
-    let mimeType = files[0].type;
-    if (mimeType.match(/image\/*/) == null) {
+    const mimeType = files[0].type;
+    if (!mimeType.match(/image\/*/)) {
       return;
     }
 
-    let reader = new FileReader();
+    const reader = new FileReader();
     this.imagePath = files;
     reader.readAsDataURL(files[0]);
     reader.onload = (_event) => {
       this.imgUrl = reader.result;
-      // this.evento.imagem = this.removeSymbolsFromString(this.imgUrl);
+      console.log(this.imgUrl);
+
+      const file = files[0].name;
+
+      const uploadOptions = {
+        contentType: 'image/jpeg',
+      };
+
+      const imgRef = ref(this.storage, `images/${file}`);
+      uploadBytes(imgRef, files[0], uploadOptions)
+        .then(() => {
+          console.log('Upload concluído com sucesso');
+          this.getImageByName(file);
+        })
+        .catch((err) => {
+          console.log('Erro ao fazer upload:', err);
+        });
     };
-  }
-
-  limparTudo() {
-    this.evento = new Eventos();
-    this.imgUrl = '';
-  }
-
-  removeSymbolsFromString(str: string): string {
-    return str.replace(/[^\w\s]/gi, '');
   }
 
   buscarPorId(id: string) {
@@ -84,5 +105,43 @@ export class EventosDetalhesComponent implements OnInit {
     });
   }
 
+  getImageByName(imageName: string) {
+    const imageRef = ref(this.storage, `images/${imageName}`);
+
+    getDownloadURL(imageRef)
+      .then((url) => {
+        console.log('URL da foto:', url);
+        this.evento.imagem = url;
+      })
+      .catch((error) => {
+        console.log('Erro ao obter a URL da foto:', error);
+      });
+  }
+  criarEvento() {
+    this.service.criarEvento(this.evento).subscribe(() => {
+      this.router.navigate(['home']);
+      console.log(this.evento);
+    });
+  }
+
+  editarEvento() {
+    this.service.editarEvento(this.evento).subscribe(() => {
+      this.router.navigate(['home']);
+      console.log(this.evento)
+    })
+  }
+
+  excluirEvento() {
+    if(this.evento.id) {
+      this.service.excluirEvento(this.evento.id).subscribe(() => {
+        this.router.navigate(['home']);
+      })
+    }
+  }
+
+  limparTudo() {
+    this.evento = new Eventos();
+    this.imgUrl = '';
+  }
 
 }

@@ -31,22 +31,16 @@ export class LayoutComponent implements OnInit {
   faList = faList;
   faCrash = faCashRegister;
   faLogout = faArrowCircleRight;
+  nome = '';
+  constructor(private router: Router, private location: Location, private service: EventosService) {}
+  pesquisar() {
+    if(this.nome) {
+      this.router.navigate(['home'], {queryParams: {nome: this.nome}})
+      return;
+    }
 
-  constructor(private router: Router, private location: Location, private service: EventosService) {
-    this.searchForm.get('search')?.valueChanges.
-    pipe(
-      debounceTime(1000),
-      distinctUntilChanged(),
-      switchMap((v) => this.service.pesquisarEvento(v))
-    )
-    .subscribe(
-      (v) => {
-        this.evento = v?.eventos;
-
-      }
-    )
+    this.router.navigate(['home'])
   }
-
   ngOnInit() {
     console.log(this.submenu);
   }

@@ -14,6 +14,21 @@ import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CadastroUsuarioComponent } from './cadastro-usuario/cadastro-usuario.component';
+import { provideFirebaseApp, initializeApp  } from '@angular/fire/app';
+import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+import { provideStorage,getStorage } from '@angular/fire/storage';
+
+// import { AngularFireModule } from '@angular/fire/compat';
+// import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBPOzwAEBRW8oGCK1eZcXJdhTwNj_3RmhQ",
+  authDomain: "wearecarnival-images.firebaseapp.com",
+  projectId: "wearecarnival-images",
+  storageBucket: "wearecarnival-images.appspot.com",
+  messagingSenderId: "375357255644",
+  appId: "1:375357255644:web:ac223fa5b288c167e3e919"
+};
 
 @NgModule({
   declarations: [
@@ -32,7 +47,13 @@ import { CadastroUsuarioComponent } from './cadastro-usuario/cadastro-usuario.co
     FontAwesomeModule,
     FormsModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    provideFirebaseApp(() => initializeApp(firebaseConfig)),
+    provideFirestore(() => getFirestore()),
+    provideStorage(() => getStorage())
+
+    // AngularFireModule.initializeApp(firebaseConfig),
+    // AngularFirestoreModule
   ],
   providers: [EventosService],
   bootstrap: [AppComponent]
