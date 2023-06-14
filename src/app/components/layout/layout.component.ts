@@ -10,6 +10,9 @@ import {
   faPlus,
 } from '@fortawesome/free-solid-svg-icons';
 import { Location } from '@angular/common';
+import { FormControl, FormGroup } from '@angular/forms';
+import { EventosService } from 'src/app/shared/servico/eventos.service';
+import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-layout',
@@ -19,14 +22,30 @@ import { Location } from '@angular/common';
 export class LayoutComponent implements OnInit {
   menu: boolean = true;
   submenu: boolean = false;
-
+  searchForm: FormGroup = new FormGroup({
+    search: new FormControl('')
+  });
+  public evento: Array<any> = [];
   faBars = faBars;
   faPlus = faPlus;
   faList = faList;
   faCrash = faCashRegister;
   faLogout = faArrowCircleRight;
 
-  constructor(private router: Router, private location: Location) {}
+  constructor(private router: Router, private location: Location, private service: EventosService) {
+    this.searchForm.get('search')?.valueChanges.
+    pipe(
+      debounceTime(1000),
+      distinctUntilChanged(),
+      switchMap((v) => this.service.pesquisarEvento(v))
+    )
+    .subscribe(
+      (v) => {
+        this.evento = v?.eventos;
+
+      }
+    )
+  }
 
   ngOnInit() {
     console.log(this.submenu);

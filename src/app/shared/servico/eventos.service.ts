@@ -30,6 +30,10 @@ export class EventosService {
     return this.http.get<Eventos>(url);
   }
 
+  pesquisarEvento(nome: string) : Observable<any> {
+    return this.http.get<Eventos>(`${API}/eventos/find?=${nome}`);
+  }
+
   listarTudo(): Observable<Eventos[]> {
     return this.http.get<Eventos[]>(API + '/eventos/find/all');
   }
