@@ -7,7 +7,7 @@
         <img src="../../assets/imagens/frevo.png" class="card-img-top" alt="..." />
         <h3>We Are Carnival</h3>
         </span>
-      <form class="d-flex" role="search" (ngSubmit)="pesquisar()">
+      <form class="d-flex" role="search">
         <input
           class="form-control me-2"
           type="search"
@@ -15,9 +15,10 @@
           aria-label="Search"
           id="search"
           name="nome"
-          [(ngModel)]="nome"
+          [(ngModel)]="termo"
+          (blur)="updateSearchTerm()"
         />
-        <button class="btn btn-light" type="submit">Procurar</button>
+        <button class="btn btn-light" type="submit" (click)="updateSearchTerm()">Procurar</button>
       </form>
       <fa-icon [icon]="faLogout" class="icone-menu" (click)="chamarRota(4)" ></fa-icon>
 

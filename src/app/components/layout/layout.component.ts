@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import {
   faArrowAltCircleLeft,
@@ -13,6 +13,7 @@ import { Location } from '@angular/common';
 import { FormControl, FormGroup } from '@angular/forms';
 import { EventosService } from 'src/app/shared/servico/eventos.service';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs';
+import { DataService } from 'src/app/shared/servico/data.service';
 
 @Component({
   selector: 'app-layout',
@@ -22,28 +23,34 @@ import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs';
 export class LayoutComponent implements OnInit {
   menu: boolean = true;
   submenu: boolean = false;
-  searchForm: FormGroup = new FormGroup({
-    search: new FormControl('')
-  });
-  public evento: Array<any> = [];
+
+
   faBars = faBars;
   faPlus = faPlus;
   faList = faList;
   faCrash = faCashRegister;
   faLogout = faArrowCircleRight;
-  nome = '';
-  constructor(private router: Router, private location: Location, private service: EventosService) {}
-  pesquisar() {
-    if(this.nome) {
-      this.router.navigate(['home'], {queryParams: {nome: this.nome}})
-      return;
-    }
 
-    this.router.navigate(['home'])
-  }
+  termo: string = '';
+
+  @Output() termoPesquisa: any = new EventEmitter<any>();
+
+  constructor(private router: Router,
+              private location: Location,
+              private dataService: DataService
+
+              ) {}
+
+
   ngOnInit() {
     console.log(this.submenu);
   }
+
+
+   updateSearchTerm() {
+    this.dataService.setSearchData(this.termo);
+  }
+
 
   abrirMenu() {
     this.menu = !this.menu;
