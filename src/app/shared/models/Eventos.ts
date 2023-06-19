@@ -12,6 +12,7 @@ export class Eventos{
     horarioSaida: string = "";
     diaSemana: string = "";
     favoritos: boolean = false;
+    diaInt: number = 0;
 }
 
 export class Mensagem{

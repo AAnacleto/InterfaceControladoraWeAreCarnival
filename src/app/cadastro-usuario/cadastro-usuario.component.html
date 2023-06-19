@@ -1,7 +1,7 @@
-<h4 class="text-center">Registre-se</h4>
+<div class="registration-container">
+  <h2>Registre-se</h2>
 
-<form class="form mt-4" [formGroup]="novoUsuarioForm">
-  <label for="email">Email</label>
+<form class="form mt-4 --bs-primary-border-subtle" [formGroup]="novoUsuarioForm">
   <input
     placeholder="e-mail"
     class="form-control"
@@ -45,3 +45,5 @@
 </form>
 
 <p>Já é um usuário? <a [routerLink]="['']">Faça login</a></p>
+
+</div>

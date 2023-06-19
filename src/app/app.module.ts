@@ -17,6 +17,8 @@ import { CadastroUsuarioComponent } from './cadastro-usuario/cadastro-usuario.co
 import { provideFirebaseApp, initializeApp  } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { provideStorage,getStorage } from '@angular/fire/storage';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // import { AngularFireModule } from '@angular/fire/compat';
 // import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
@@ -50,7 +52,13 @@ const firebaseConfig = {
     ReactiveFormsModule,
     provideFirebaseApp(() => initializeApp(firebaseConfig)),
     provideFirestore(() => getFirestore()),
-    provideStorage(() => getStorage())
+    provideStorage(() => getStorage()),
+    ToastrModule.forRoot({
+      positionClass: "toast-top-center",
+      preventDuplicates: true,
+      timeOut: 3000
+    }),
+    BrowserAnimationsModule
 
     // AngularFireModule.initializeApp(firebaseConfig),
     // AngularFirestoreModule

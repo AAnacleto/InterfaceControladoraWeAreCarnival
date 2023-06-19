@@ -40,7 +40,7 @@ export class EventosDetalhesComponent implements OnInit {
   diaSemana = [
     {"id": 1 ,"nome": "Quinta-feira"},
     {"id": 2 ,"nome": "Sexta-feira"},
-    {"id": 3 ,"nome": "Sábado de Carnaval"},
+    {"id": 3 ,"nome": "Sabado de Carnaval"},
     {"id": 4 ,"nome": "Domingo de Carnaval"},
     {"id": 5 ,"nome": "Segunda de Carnaval"},
     {"id": 6 ,"nome": "Terça-feira Gorda"},
@@ -134,7 +134,28 @@ export class EventosDetalhesComponent implements OnInit {
         console.log('Erro ao obter a URL da foto:', error);
       });
   }
+
+  inserirDia() {
+    switch (this.evento.diaSemana) {
+      case 'Quinta-feira':
+        return 1;
+      case "Sexta-feira":
+        return 2;
+      case 'Sabado de Carnaval':
+        return 3;
+      case 'Domingo de Carnaval':
+        return 4;
+      case "Segunda de Carnaval":
+        return 5;
+      case "Terca-feira Gorda":
+        return 6;
+      case "Quarta-feira de Cinzas":
+        return 7;
+    }
+    return 0;
+  }
   criarEvento() {
+    this.evento.diaInt = this.inserirDia();
     this.service.criarEvento(this.evento).subscribe(() => {
       this.router.navigate(['home']);
       console.log(this.evento);

@@ -28,6 +28,8 @@ export class CadastroUsuarioComponent {
       this.service.cadastraNovoUsuario(this.novoUsuarioForm.value).subscribe(() =>{
         this.router.navigate([''])
       })
+    } else {
+      alert('Por favor, preencha os dados corretamente')
     }
 
   }
