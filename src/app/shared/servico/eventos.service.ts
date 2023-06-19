@@ -38,6 +38,10 @@ export class EventosService {
     return this.http.get<Eventos[]>(API + '/eventos/find/all');
   }
 
+  listarCidade(nomeCidade: string): Observable<Eventos[]> {
+    return this.http.get<Eventos[]>(API + '/eventos/find/byCity/' + nomeCidade)
+  }
+
   listar(pagina: number, filtro: string): Observable<Eventos[]> {
     const itensPorPagina = 6;
 

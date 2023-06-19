@@ -14,8 +14,7 @@ import { DataService } from '../shared/servico/data.service';
 export class HomeComponent implements OnInit {
 
   fatrash = faTrash;
-  // listaEventos: Eventos[] = [];
-  listaEventos: any[] = [];
+  listaEventos: Eventos[] = [];
   paginaAtual: number = 1;
   haMaisEventos: boolean = true;
   filtro: string = '';
@@ -181,18 +180,16 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void{
     this.listarTudo();
-    this.listaEventos = this.items; //remover esse trecho
+    // this.listaEventos = this.items; //remover esse trecho
     this.dataService.getSearchData().subscribe(data => {
        this.termoPesquisa = data;
 
       if(this.termoPesquisa != ""){
         this.pesquisarEvento();
       } else if (this.termoPesquisa === ""){
-        this.listaEventos = this.items; //trocar por listar tudo
-
+        // this.listaEventos = this.items; //trocar por listar tudo
+        this.listarTudo();
       }
-
-
     });
   }
 
@@ -204,7 +201,7 @@ export class HomeComponent implements OnInit {
 
   pesquisarEvento(){
     const lowerCaseSearchTerm = this.termoPesquisa.toLowerCase();
-    this.listaEventos= this.items.filter(item => item.name.toLowerCase().includes(lowerCaseSearchTerm));
+    this.listaEventos= this.listaEventos.filter(item => item.nome.toLowerCase().includes(lowerCaseSearchTerm));
   }
 
   listarTudo() {

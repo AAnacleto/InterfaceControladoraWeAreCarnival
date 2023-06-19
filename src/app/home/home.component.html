@@ -3,13 +3,16 @@
 >
   <div class="card-list">
     <div class="card" style="width: 30rem" *ngFor="let item of listaEventos" (click)="irParaDetalhes(item.id)">
-      <a>  <img [src]="item.img" class="card-img-top" alt="..."/></a>
-      <div class="card-body heigh-card">
-        <h5 class="card-title">{{ item.name }}</h5>
+      <a>  <img [src]="item.imagem" class="card-img-top heigh-card" alt="..."/></a>
+      <div class="card-body">
+        <h5 class="card-title">{{ item.nome }}</h5>
         <p class="card-text">
           {{item.horarioSaida}}
         </p>
-        <a class="btn btn-primary">Mais Informações</a>
+        <div class=" d-flex align-items-end">
+
+          <a class="btn btn-primary">Mais Informações</a>
+        </div>
       </div>
     </div>
 

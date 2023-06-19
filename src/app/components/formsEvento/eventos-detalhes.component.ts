@@ -47,6 +47,13 @@ export class EventosDetalhesComponent implements OnInit {
     {"id": 7 ,"nome": "Quarta-feira de Cinzas"}
   ]
 
+  categoria = [
+    {"id": 1, "nome": "Camarote"},
+    {"id": 2, "nome": "Tradicional"},
+    {"id": 3, "nome": "Infantil"},
+    {"id": 4, "nome": "Previas"}
+  ]
+
 
   ngOnInit() {
     this.parametroRota = this.routeActivated.snapshot.params['id'];

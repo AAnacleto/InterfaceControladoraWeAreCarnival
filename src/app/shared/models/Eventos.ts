@@ -8,6 +8,7 @@ export class Eventos{
     nomeLocal: string = "";
     imagem: string = "";
     data: string = "";
+    categoria: string = "";
     horarioSaida: string = "";
     diaSemana: string = "";
     favoritos: boolean = false;
