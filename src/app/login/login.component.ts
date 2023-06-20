@@ -30,7 +30,6 @@ export class LoginComponent {
         console.log(this.loginForm.value.email)
 
         if (this.result.senha === this.loginForm.value.senha) {
-            this.sucesso();
             this.router.navigate(['/home']);
           } else {
             this.error();

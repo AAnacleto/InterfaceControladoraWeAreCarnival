@@ -3,13 +3,14 @@
 
 <form class="form mt-4 --bs-primary-border-subtle" [formGroup]="novoUsuarioForm">
   <input
-    placeholder="e-mail"
+    placeholder="Email"
     class="form-control"
     formControlName="email"
     id="email"
   />
   <div
-    class="form-group"
+  style="color:red"
+    class="form-group "
     *ngIf="
   novoUsuarioForm.get('email')?.errors?.['required'] &&
   novoUsuarioForm.get('email')?.touched"
@@ -23,6 +24,7 @@
     id="nome"
   />
   <div
+    style="color:red"
     class="form-group"
     *ngIf="
       novoUsuarioForm.get('nome')?.errors &&
@@ -37,11 +39,12 @@
   id="senha"
   />
   <div
+  style="color: red;"
     class="form-group"
     *ngIf="novoUsuarioForm.get('senha')?.errors?.['minlength'] && novoUsuarioForm.get('senha')?.touched"
     mensagem="Senha deve ser diferente do usuário"
-  >Minimo de 8 caracteres</div>
-  <button (click)="cadastrar()" class="btn btn-primary btn-block">Cadastro</button>
+  >Mínimo de 8 caracteres</div>
+  <button (click)="cadastrar()" class="btn btn-primary btn-block">Cadastrar</button>
 </form>
 
 <p>Já é um usuário? <a [routerLink]="['']">Faça login</a></p>

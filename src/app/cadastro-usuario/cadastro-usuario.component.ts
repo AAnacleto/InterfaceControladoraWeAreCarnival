@@ -5,6 +5,7 @@ import { CadastroUsuarioService } from './cadastro-usuario.service';
 import { UsuarioExisteService } from './usuario-existe.service';
 import { usuarioSenhaIguaisValidator } from './usuario-senha-iguais.validator';
 import { minusculoValidator } from './minusculo.validator';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-cadastro-usuario',
@@ -13,10 +14,10 @@ import { minusculoValidator } from './minusculo.validator';
 })
 export class CadastroUsuarioComponent {
   novoUsuarioForm!: FormGroup;
-  constructor(private router: Router, private formBuilder: FormBuilder, private service: CadastroUsuarioService, private usuarioExisteService: UsuarioExisteService){}
+  constructor(private router: Router, private formBuilder: FormBuilder, private service: CadastroUsuarioService, private usuarioExisteService: UsuarioExisteService, private toast: ToastrService){}
   ngOnInit(): void {
     this.novoUsuarioForm = this.formBuilder.group({
-      email: ['', Validators.compose([Validators.required, Validators.email])],
+      email: ['', Validators.compose([Validators.required, Validators.email, Validators.maxLength(60)])],
       nome: ['', Validators.compose([Validators.required, Validators.minLength(4)])],
       senha: ['', Validators.compose([Validators.required, Validators.minLength(8)])],
     },
@@ -29,7 +30,7 @@ export class CadastroUsuarioComponent {
         this.router.navigate([''])
       })
     } else {
-      alert('Por favor, preencha os dados corretamente')
+      this.toast.error('Por favor, preencha os dados corretamente.')
     }
 
   }

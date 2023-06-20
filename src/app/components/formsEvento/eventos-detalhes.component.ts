@@ -9,6 +9,7 @@ import {
   uploadBytes,
 } from '@angular/fire/storage';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -33,7 +34,8 @@ export class EventosDetalhesComponent implements OnInit {
     private router: Router,
     private routeActivated: ActivatedRoute,
     private service: EventosService,
-    private storage: Storage
+    private storage: Storage,
+    private toast: ToastrService
   ) {}
 
 
@@ -158,7 +160,7 @@ export class EventosDetalhesComponent implements OnInit {
     this.evento.diaInt = this.inserirDia();
     this.service.criarEvento(this.evento).subscribe(() => {
       this.router.navigate(['home']);
-      console.log(this.evento);
+      this.toast.success('Evento cadastrado com sucesso!')
     });
   }
 
@@ -173,7 +175,7 @@ export class EventosDetalhesComponent implements OnInit {
   editarEvento() {
     this.service.editarEvento(this.evento).subscribe(() => {
       this.router.navigate(['home']);
-      console.log(this.evento)
+      this.toast.success('Evento Editado com sucesso!')
     })
   }
 
@@ -181,6 +183,7 @@ export class EventosDetalhesComponent implements OnInit {
     if(this.evento.id) {
       this.service.excluirEvento(this.evento.id).subscribe(() => {
         this.router.navigate(['home']);
+        this.toast.success('Evento excluído com sucesso.')
       })
     }
   }
