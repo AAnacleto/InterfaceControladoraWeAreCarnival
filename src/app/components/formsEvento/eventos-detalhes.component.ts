@@ -35,6 +35,7 @@ export class EventosDetalhesComponent implements OnInit {
   mensagemExcecao!: Mensagem;
   cepInvalido: boolean = false;
   cepValido: boolean = false;
+  campoObrigatorio: boolean = false;
 
   @ViewChild('file', { static: false })
   inputArquivoRef!: ElementRef<HTMLInputElement>;
@@ -230,16 +231,19 @@ export class EventosDetalhesComponent implements OnInit {
     //   this.router.navigate(['home']);
     //   console.log(this.evento);
     // });
-    if (this.evento.nome === '' || this.evento.categoria === '') {
+    if (this.evento.nome === '' || this.evento.categoria === '' || this.evento.imagem === '' || this.evento.horarioSaida === '') {
+      this.campoObrigatorio = true
       this.toast.error('Campos obrigatórios não foram preenchidos');
       return false;
     }
+    this.campoObrigatorio = false;
     this.toast.success('Evento foi Cadastrado com sucesso!!');
     return true;
     console.log(this.evento);
   }
 
   editarEvento() {
+    this.toast.success('Evento alterado com sucesso!!');
     this.service.editarEvento(this.evento).subscribe(() => {
       this.router.navigate(['home']);
       console.log(this.evento);

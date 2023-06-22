@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { EventosService } from '../shared/servico/eventos.service';
 import { Eventos } from '../shared/models/Eventos';
 import { DataService } from '../shared/servico/data.service';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -186,7 +187,11 @@ export class HomeComponent implements OnInit {
   }
   ]
 
-  constructor(private router: Router, private service: EventosService, private dataService: DataService ) { }
+  constructor(private router: Router,
+              private service: EventosService,
+              private dataService: DataService,
+              private toast: ToastrService
+             ) { }
 
   ngOnInit(): void{
     // this.listarTudo();
@@ -222,6 +227,11 @@ export class HomeComponent implements OnInit {
     console.log(lowerCaseSearchTerm)
     this.listaEventos= this.items.filter(item => item.diaSemana.toLowerCase() === lowerCaseSearchTerm || item.nome.toLowerCase() === lowerCaseSearchTerm || item.categoria.toLowerCase() === lowerCaseSearchTerm);
     console.log(this.listaEventos)
+
+    if(this.listaEventos.length === 0) {
+      this.toast.error('Parece que não achamos o termo que você está procurando, digite novamente ...');
+
+    }
 
   }
 
