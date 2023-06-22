@@ -1,12 +1,19 @@
 <header>
   <nav class="navbar bg-primary">
-
     <div class="container-fluid">
-      <fa-icon [icon]="faBars" class="icone-menu" (click)="abrirMenu()" ></fa-icon>
-      <span class="navbar-brand mb-2 h1 title" style="color: white;">
-        <img src="../../assets/imagens/frevo.png" class="card-img-top" alt="..." />
+      <fa-icon
+        [icon]="faBars"
+        class="icone-menu"
+        (click)="abrirMenu()"
+      ></fa-icon>
+      <span class="navbar-brand mb-2 h1 title" style="color: white">
+        <img
+          src="../../assets/imagens/frevo.png"
+          class="card-img-top"
+          alt="..."
+        />
         <h3>We Are Carnival</h3>
-        </span>
+      </span>
       <form class="d-flex" role="search">
         <input
           class="form-control me-2"
@@ -18,47 +25,53 @@
           [(ngModel)]="termo"
           (blur)="updateSearchTerm()"
         />
-        <button class="btn btn-light" type="submit" (click)="updateSearchTerm()">Procurar</button>
+        <button
+          class="btn btn-light"
+          type="submit"
+          (click)="updateSearchTerm()"
+        >
+          Procurar
+        </button>
       </form>
-      <fa-icon [icon]="faLogout" class="icone-menu" (click)="chamarRota(4)" ></fa-icon>
+      <fa-icon
+        [icon]="faLogout"
+        class="icone-menu"
+        (click)="chamarRota(4)"
+      ></fa-icon>
 
-      <!-- <a class="navbar-brand mb-2 h1 title" style="color: white; cursor: pointer" (click)="chamarRota(4)">
-       Log out
-      </a> -->
+
     </div>
   </nav>
+
 </header>
 
 <main>
-  <div class="row" >
+  <div class="row">
     <div class="col-2" *ngIf="menu">
       <ul
         class="nav flex-column"
-        style="background-color: #e9e9e9; height: 100vh; width: 30vh;">
-
-      <li id="menu" class="nav-item">
-        <a class="nav-link" (click)="chamarRota(1)">
-          <fa-icon class="icon" [icon]="faList"></fa-icon>
+        style="background-color: #e9e9e9; height: 100vh; width: 30vh"
+      >
+        <li id="menu" class="nav-item">
+          <a class="nav-link" (click)="chamarRota(1)">
+            <fa-icon class="icon" [icon]="faList"></fa-icon>
             Eventos
           </a>
-      </li>
+        </li>
 
-      <li id="menu" class="nav-item">
-        <a class="nav-link" (click)="chamarRota(2)">
-          <fa-icon class="icon" [icon]="faPlus"></fa-icon>
-             Novo Evento
-        </a>
+        <li id="menu" class="nav-item">
+          <a class="nav-link" (click)="chamarRota(2)">
+            <fa-icon class="icon" [icon]="faPlus"></fa-icon>
+            Novo Evento
+          </a>
+        </li>
 
-      </li>
-
-      <li id="menu" class="nav-item">
-        <a class="nav-link" (click)="chamarRota(3)">
-          <fa-icon class="icon" [icon]="faCrash"></fa-icon>
-             Dashboard
-        </a>
-
-      </li>
-
+        <li id="menu" class="nav-item">
+          <a class="nav-link" (click)="chamarRota(3)">
+            <fa-icon class="icon" [icon]="faCrash"></fa-icon>
+            Dashboard
+          </a>
+        </li>
       </ul>
     </div>
 
@@ -67,5 +80,3 @@
     </div>
   </div>
 </main>
-
-

@@ -1,57 +1,14 @@
 <app-layout
 (termoPesquisa)="termoPesquisa"
 >
-  <div class="card-list">
+<div class="card-list">
     <div class="card" style="width: 30rem" *ngFor="let item of listaEventos" (click)="irParaDetalhes(item.id)">
-      <a>  <img [src]="item.imagem" class="card-img-top heigh-card" alt="..."/></a>
-      <div class="card-body">
+      <a>  <img [src]="item.imagem" class="card-img-top" alt="..."/></a>
+      <div class="card-body heigh-card">
         <h5 class="card-title">{{ item.nome }}</h5>
-        <!-- <p class="card-text">
-          {{item.horarioSaida}}
-        </p> -->
-        <div class=" d-flex align-items-end">
 
-          <a class="btn btn-primary">Mais Informações</a>
-        </div>
+        <a class="btn btn-primary">Mais Informações</a>
       </div>
     </div>
-
-    <!-- <div class="card" style="width: 18rem">
-      <img src="../../assets/imagens/2.png" class="card-img-top" alt="..." />
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">
-          Some quick example text to build on the card title and make up the
-          bulk of the card's content.
-        </p>
-        <a href="#" class="btn btn-primary">Mais Informações</a>
-
-      </div>
-    </div>
-
-    <div class="card" style="width: 18rem">
-      <img src="../../assets/imagens/3.jpg" class="card-img-top" alt="..." />
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">
-          Some quick example text to build on the card title and make up the
-          bulk of the card's content.
-        </p>
-        <a href="#" class="btn btn-primary">Mais Informações</a>
-      </div>
-    </div>
-
-    <div class="card" style="width: 18rem">
-      <img src="../../assets/imagens/4.jpg" class="card-img-top" alt="..." />
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">
-          Some quick example text to build on the card title and make up the
-          bulk of the card's content.
-        </p>
-        <a href="#" class="btn btn-primary">Mais Informações</a>
-      </div>
-    </div> -->
-
   </div>
 </app-layout>

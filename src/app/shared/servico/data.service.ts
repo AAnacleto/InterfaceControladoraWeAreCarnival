@@ -19,4 +19,6 @@ export class DataService {
   getSearchData() {
     return this.searchData.asObservable();
   }
+
+
 }
