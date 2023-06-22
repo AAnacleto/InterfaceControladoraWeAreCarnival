@@ -60,7 +60,7 @@ export class HomeComponent implements OnInit {
     "horarioSaida": "00:00",
     "diaSemana": "Sábado",
     "favoritos": false,
-    "categoria": ""
+    "categoria": "Camarote"
   },
   {
    "id": 3,
@@ -98,7 +98,7 @@ export class HomeComponent implements OnInit {
     "imagem": "./assets/imagens/4.jpg",
     "data": "2024-02-10",
     "horarioSaida": "00:00",
-    "diaSemana": "Sábado",
+    "diaSemana": "Segunda" || "segunda",
     "favoritos": false,
     "categoria": "Prévias" || "previas"
 

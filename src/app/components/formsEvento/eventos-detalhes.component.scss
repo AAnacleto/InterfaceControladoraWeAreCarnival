@@ -22,6 +22,28 @@ div#spinner{
   margin-right: 50%;
 }
 
+.msg-obrigatorio{
+  color: red;
+  font-size: 0.8rem;
+}
+.msg-erro-cep{
+  color: red;
+  font-size: 0.8rem;
+  margin-top: -15px;
+
+}
+
+.msg-sucess-cep{
+  color: green;
+  font-size: 0.8rem;
+  margin-top: -15px;
+}
+
+.msg{
+  font-size: 0.8rem;
+  color: gray;
+  bottom: 0;
+}
 
 
 

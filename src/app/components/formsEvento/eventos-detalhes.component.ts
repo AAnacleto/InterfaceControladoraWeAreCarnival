@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Eventos } from 'src/app/shared/models/Eventos';
+import { Eventos, Mensagem } from 'src/app/shared/models/Eventos';
 import { EventosService } from 'src/app/shared/servico/eventos.service';
 import { EnderecoService } from 'src/app/shared/servico/endereco.service';
 import {
@@ -11,7 +11,8 @@ import {
 } from '@angular/fire/storage';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { EnderecoApi } from 'src/app/shared/models/Endereco';
-
+import { ToastrService } from 'ngx-toastr';
+import { catchError, throwError } from 'rxjs';
 
 @Component({
   selector: 'app-eventos-detalhes',
@@ -31,6 +32,9 @@ export class EventosDetalhesComponent implements OnInit {
   dataString!: string;
   cep!: string;
   endereco!: EnderecoApi;
+  mensagemExcecao!: Mensagem;
+  cepInvalido: boolean = false;
+  cepValido: boolean = false;
 
   @ViewChild('file', { static: false })
   inputArquivoRef!: ElementRef<HTMLInputElement>;
@@ -46,42 +50,42 @@ export class EventosDetalhesComponent implements OnInit {
   ];
 
   categoria = [
-    {id: 1, nome: "Camarote"},
-    {id: 2, nome: "Tradicional"},
-    {id: 3, nome: "Infantil"},
-    {id: 4, nome: "Previas"}
-  ]
+    { id: 1, nome: 'Camarote' },
+    { id: 2, nome: 'Tradicional' },
+    { id: 3, nome: 'Infantil' },
+    { id: 4, nome: 'Previas' },
+  ];
 
   polos: any[] = [];
 
   polosOlinda = [
     { id: 0, nome: 'Sem Polo', expandir: false },
-    { id: 1,nome: 'Polo Carmo', expandir: false },
-    { id: 2,nome: 'Polo Varadouro', expandir: false },
-    { id: 3,nome: 'Polo Guadalupe', expandir: false },
-    { id: 4,nome: 'Polo Alto da Sé', expandir: false },
-    { id: 5,nome: 'Polo Rio Doce', expandir: false },
-    { id: 6,nome: 'Polo Alafin Oyó', expandir: false },
-    { id: 7,nome: 'Polo Xambá', expandir: false },
-    { id: 8,nome: 'Polo Casa da Rabeca', expandir: false },
-    { id: 9,nome: 'Infantis', expandir: false },
+    { id: 1, nome: 'Polo Carmo', expandir: false },
+    { id: 2, nome: 'Polo Varadouro', expandir: false },
+    { id: 3, nome: 'Polo Guadalupe', expandir: false },
+    { id: 4, nome: 'Polo Alto da Sé', expandir: false },
+    { id: 5, nome: 'Polo Rio Doce', expandir: false },
+    { id: 6, nome: 'Polo Alafin Oyó', expandir: false },
+    { id: 7, nome: 'Polo Xambá', expandir: false },
+    { id: 8, nome: 'Polo Casa da Rabeca', expandir: false },
+    { id: 9, nome: 'Infantis', expandir: false },
   ];
 
   polosRecife = [
-    { id: 0,nome: 'Sem Polo', expandir: false },
-    { id: 1,nome: 'Polo Marco Zero', expandir: false },
-    { id: 2,nome: 'Polo Arsenal' , expandir: false},
-    { id: 3,nome: 'Polo Samba na Moeda', expandir: false },
-    { id: 4,nome: 'Polo Polo da Indepedencia', expandir: false },
-    { id: 5,nome: 'Polo Patio de São Pedro', expandir: false },
-    { id: 6,nome: 'Polo Novo Cais', expandir: false },
-    { id: 7,nome: 'Polo Corredor Comunitário', expandir: false },
-    { id: 8,nome: 'Polo Três Carneiros' , expandir: false},
-    { id: 9,nome: 'Polo Morro da Conceição', expandir: false },
-    { id: 10,nome: 'Polo Rua da Moeda', expandir: false },
-    { id: 11,nome: 'Polo Patio do Terço', expandir: false },
-    { id: 12,nome: 'Infantis' , expandir: false},
-    { id: 13,nome: 'Mercado Boa Vista' , expandir: false},
+    { id: 0, nome: 'Sem Polo', expandir: false },
+    { id: 1, nome: 'Polo Marco Zero', expandir: false },
+    { id: 2, nome: 'Polo Arsenal', expandir: false },
+    { id: 3, nome: 'Polo Samba na Moeda', expandir: false },
+    { id: 4, nome: 'Polo Polo da Indepedencia', expandir: false },
+    { id: 5, nome: 'Polo Patio de São Pedro', expandir: false },
+    { id: 6, nome: 'Polo Novo Cais', expandir: false },
+    { id: 7, nome: 'Polo Corredor Comunitário', expandir: false },
+    { id: 8, nome: 'Polo Três Carneiros', expandir: false },
+    { id: 9, nome: 'Polo Morro da Conceição', expandir: false },
+    { id: 10, nome: 'Polo Rua da Moeda', expandir: false },
+    { id: 11, nome: 'Polo Patio do Terço', expandir: false },
+    { id: 12, nome: 'Infantis', expandir: false },
+    { id: 13, nome: 'Mercado Boa Vista', expandir: false },
   ];
 
   constructor(
@@ -90,11 +94,8 @@ export class EventosDetalhesComponent implements OnInit {
     private service: EventosService,
     private storage: Storage,
     private enderecoService: EnderecoService,
-    // private toast: ToastrService
-
-
+    private toast: ToastrService
   ) {}
-
 
   // diaSemana = [
   //   {"id": 1 ,"nome": "Quinta-feira"},
@@ -105,7 +106,6 @@ export class EventosDetalhesComponent implements OnInit {
   //   {"id": 6 ,"nome": "Terça-feira Gorda"},
   //   {"id": 7 ,"nome": "Quarta-feira de Cinzas"}
   // ]
-
 
   ngOnInit() {
     this.parametroRota = this.routeActivated.snapshot.params['id'];
@@ -196,6 +196,7 @@ export class EventosDetalhesComponent implements OnInit {
     const day = this.data.getDay();
     const dayOfWeek: any[] = this.diaSemana.filter((d) => d.id === day);
     this.evento.diaSemana = dayOfWeek[0].nome;
+    this.evento.diaInt = dayOfWeek[0].id;
   }
 
   preencherEndereco() {
@@ -204,39 +205,52 @@ export class EventosDetalhesComponent implements OnInit {
       this.evento.endereco.nomeRua = this.endereco.logradouro;
       this.evento.endereco.bairro = this.endereco.bairro;
       this.evento.endereco.cidade = this.endereco.localidade;
+      this.mensagemExcecao = data as Mensagem;
+      this.cepInvalido = false;
+      this.cepValido = true;
 
-      if(this.evento.endereco.cidade == 'Olinda'){
+
+      if (this.evento.endereco.cidade == 'Olinda') {
         this.polos = this.polosOlinda;
       } else {
         this.polos = this.polosRecife;
       }
+
+      if (this.mensagemExcecao.erro === true) {
+        this.toast.error('Esse Cep é invalido');
+        this.cepInvalido = true;
+        this.cepValido = false;
+
+      }
     });
   }
-
 
   criarEvento() {
     // this.service.criarEvento(this.evento).subscribe(() => {
     //   this.router.navigate(['home']);
     //   console.log(this.evento);
     // });
-    if(this.evento.nome === ""){
-
+    if (this.evento.nome === '' || this.evento.categoria === '') {
+      this.toast.error('Campos obrigatórios não foram preenchidos');
+      return false;
     }
+    this.toast.success('Evento foi Cadastrado com sucesso!!');
+    return true;
     console.log(this.evento);
   }
 
   editarEvento() {
     this.service.editarEvento(this.evento).subscribe(() => {
       this.router.navigate(['home']);
-      console.log(this.evento)
-    })
+      console.log(this.evento);
+    });
   }
 
   excluirEvento() {
     if (this.evento.id) {
       this.service.excluirEvento(this.evento.id).subscribe(() => {
         this.router.navigate(['home']);
-      })
+      });
     }
   }
 

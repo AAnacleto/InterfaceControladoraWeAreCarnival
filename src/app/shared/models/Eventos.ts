@@ -16,6 +16,5 @@ export class Eventos{
 }
 
 export class Mensagem{
-  status: string = '';
-  mensagem: string = '';
+  erro!: boolean;
 }
