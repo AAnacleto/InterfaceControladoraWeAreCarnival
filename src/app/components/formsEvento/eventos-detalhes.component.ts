@@ -196,6 +196,9 @@ export class EventosDetalhesComponent implements OnInit {
     //   this.router.navigate(['home']);
     //   console.log(this.evento);
     // });
+    if(this.evento.nome === ""){
+      
+    }
     console.log(this.evento);
   }
 
