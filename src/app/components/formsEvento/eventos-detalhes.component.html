@@ -38,46 +38,59 @@
       <br />
       <br />
       <div class="row">
-        <div class="form-group col-lg-4">
+
+        <div class="form-group col-lg-6">
           <label
             for="data"
-            class="control-label"
+            class="control-label "
             disabled="operacao=='Detalhar'"
             >Nome do Evento:</label
           >
-          <input type="text" class="form-control" [(ngModel)]="evento.nome" />
+          <input type="text" class="form-control required" [(ngModel)]="evento.nome" required aria-required="true"/>
         </div>
-        <div class="form-group col-lg-4">
-          <label
-            for="data"
-            class="control-label"
-            disabled="operacao=='Detalhar'"
-            >Polo do Evento:</label
-          >
-          <input type="text" class="form-control" [(ngModel)]="evento.polo" />
-        </div>
+
+
+
+
         <div class="form-group col-lg-2">
           <label for="data" class="control-label">Data:</label>
-          <input type="date" class="form-control" [(ngModel)]="evento.data" />
+          <input type="date" class="form-control" [(ngModel)]="dataString" (blur)="pegarData()"/>
         </div>
+
+        <div class="form-group col-lg-2">
+          <label for="data" class="control-label">Dia da Semana:</label>
+          <input type="text" class="form-control" disabled [(ngModel)]="evento.diaSemana" />
+
+           <!-- <select class="form-control" [(ngModel)]="evento.diaSemana">
+            <option selected [ngValue]="">Selecione o dia da semana</option>
+            <option *ngFor="let dia of diaSemana" [ngValue]="dia.nome">{{dia.nome}}</option>
+           </select> -->
+        </div>
+
         <div class="form-group col-lg-2">
           <label for="data" class="control-label">Horário de Saida:</label>
           <input type="time" class="form-control" [(ngModel)]="evento.horarioSaida" />
         </div>
 
         <div class="form-group col-lg-2">
-          <label for="data" class="control-label">Dia da Semana:</label>
-           <select class="form-control" [(ngModel)]="evento.diaSemana">
-            <option selected [ngValue]="">Selecione o dia da semana</option>
-            <option *ngFor="let dia of diaSemana" [ngValue]="dia.nome">{{dia.nome}}</option>
-           </select>
+          <label for="data" class="control-label">Cep:</label>
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="cep"
+            (blur)="preencherEndereco()"
+            />
         </div>
 
-        <!-- <select class="form-control">
-          <option selected>Open this select menu</option>
-          <option *ngFor="let dia of diaSemana" value="evento.diaSemana" [(ngModel)]="evento.diaSemana">{{dia.nome}}</option>
 
-        </select> -->
+       <div class="form-group col-lg-6">
+          <label for="data" class="control-label">Endereço:</label>
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="evento.endereco.nomeRua"
+          />
+        </div>
 
         <div class="form-group col-lg-3">
           <label for="data" class="control-label">Local do Evento:</label>
@@ -87,14 +100,7 @@
             [(ngModel)]="evento.nomeLocal"
           />
         </div>
-        <div class="form-group col-lg-6">
-          <label for="data" class="control-label">Endereço:</label>
-          <input
-            type="text"
-            class="form-control"
-            [(ngModel)]="evento.endereco.nomeRua"
-          />
-        </div>
+
         <div class="form-group col-lg-1">
           <label for="data" class="control-label">Número:</label>
           <input
@@ -103,7 +109,7 @@
             [(ngModel)]="evento.endereco.numero"
           />
         </div>
-        <div class="form-group col-lg-4">
+        <div class="form-group col-lg-3">
           <label for="data" class="control-label">Ponto de Referência:</label>
           <input
             type="text"
@@ -116,9 +122,25 @@
           <input
             type="text"
             class="form-control"
+            disabled
             [(ngModel)]="evento.endereco.cidade"
           />
         </div>
+
+        <div class="form-group col-lg-4">
+          <label
+            for="data"
+            class="control-label"
+            disabled="operacao=='Detalhar'"
+            >Polo do Evento:</label
+          >
+           <select class="form-control" [(ngModel)]="evento.polo">
+            <!-- <option selected [ngValue]="">Selecione o Polo</option> -->
+            <option *ngFor="let polo of polos" [ngValue]="polo.nome">{{polo.nome}}</option>
+           </select>
+          <!-- <input type="text" class="form-control" [(ngModel)]="evento.polo" /> -->
+        </div>
+
         <div class="form-group col-lg-2">
           <label for="data" class="control-label">Bairro:</label>
           <input

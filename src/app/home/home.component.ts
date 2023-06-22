@@ -38,7 +38,8 @@ export class HomeComponent implements OnInit {
     "data": "2024-02-10",
     "horarioSaida": "00:00",
     "diaSemana": "Sábado",
-    "favoritos": false
+    "favoritos": false,
+    "categoria": ""
   },
   {
     "id": 2,
@@ -57,7 +58,8 @@ export class HomeComponent implements OnInit {
     "data": "2024-02-10",
     "horarioSaida": "00:00",
     "diaSemana": "Sábado",
-    "favoritos": false
+    "favoritos": false,
+    "categoria": ""
   },
   {
    "id": 3,
@@ -76,7 +78,8 @@ export class HomeComponent implements OnInit {
     "data": "2024-02-10",
     "horarioSaida": "00:00",
     "diaSemana": "Sábado",
-    "favoritos": false
+    "favoritos": false,
+    "categoria": "Infantil" || "infantil"
   },
   {
     "id": 4,
@@ -95,7 +98,8 @@ export class HomeComponent implements OnInit {
     "data": "2024-02-10",
     "horarioSaida": "00:00",
     "diaSemana": "Sábado",
-    "favoritos": false
+    "favoritos": false,
+    "categoria": "Prévias" || "previas"
 
   },
   {
@@ -115,7 +119,8 @@ export class HomeComponent implements OnInit {
     "data": "2024-02-10",
     "horarioSaida": "00:00",
     "diaSemana": "Sábado",
-    "favoritos": false
+    "favoritos": false,
+    "categoria": "Infantil"
 
   },
   {
@@ -135,7 +140,8 @@ export class HomeComponent implements OnInit {
     "data": "2024-02-10",
     "horarioSaida": "00:00",
     "diaSemana": "Sábado",
-    "favoritos": false
+    "favoritos": false,
+    "categoria": "Tradicional"
   },
   {
     "id": 7,
@@ -154,7 +160,8 @@ export class HomeComponent implements OnInit {
     "data": "2024-02-10",
     "horarioSaida": "00:00",
     "diaSemana": "Sábado",
-    "favoritos": false
+    "favoritos": false,
+    "categoria": "Tradicional"
   },
   {
     "id": 8,
@@ -173,28 +180,31 @@ export class HomeComponent implements OnInit {
     "data": "2024-02-10",
     "horarioSaida": "00:00",
     "diaSemana": "Sábado",
-    "favoritos": false
+    "favoritos": false,
+    "categoria": "Tradicional"
   }
   ]
 
   constructor(private router: Router, private service: EventosService, private dataService: DataService ) { }
 
   ngOnInit(): void{
-    this.listarTudo();
+    // this.listarTudo();
     this.listaEventos = this.items; //remover esse trecho
     this.dataService.getSearchData().subscribe(data => {
        this.termoPesquisa = data;
-
+       console.log(this.termoPesquisa)
+       this.pesquisarEvento();
       if(this.termoPesquisa != ""){
         this.pesquisarEvento();
       } else if (this.termoPesquisa === ""){
-        this.listaEventos = this.items; //trocar por listar tudo
+        this.listaEventos = this.items;
 
       }
 
 
     });
   }
+
 
   irParaDetalhes(id: string){
     console.log(id)
@@ -204,7 +214,10 @@ export class HomeComponent implements OnInit {
 
   pesquisarEvento(){
     const lowerCaseSearchTerm = this.termoPesquisa.toLowerCase();
-    this.listaEventos= this.items.filter(item => item.name.toLowerCase().includes(lowerCaseSearchTerm));
+    console.log(lowerCaseSearchTerm)
+    this.listaEventos= this.items.filter(item => item.diaSemana.toLowerCase() === lowerCaseSearchTerm || item.name.toLowerCase() === lowerCaseSearchTerm || item.categoria.toLowerCase() === lowerCaseSearchTerm);
+    console.log(this.listaEventos)
+
   }
 
   listarTudo() {
