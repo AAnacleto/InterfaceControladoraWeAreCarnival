@@ -194,10 +194,10 @@ export class HomeComponent implements OnInit {
              ) { }
 
   ngOnInit(): void{
-    // this.listarTudo();
+    this.listarTudo();
 
     //comentar esse trecho quando tiver usando o banco de dados
-    this.listaEventos = this.items;
+    // this.listaEventos = this.items;
 
     this.dataService.getSearchData().subscribe(data => {
        this.termoPesquisa = data;
@@ -207,7 +207,7 @@ export class HomeComponent implements OnInit {
         this.pesquisarEvento();
       } else if (this.termoPesquisa === ""){
       //comentar esse trecho quando tiver usando o banco de dados
-         this.listaEventos = this.items;
+        //  this.listaEventos = this.items;
 
         // this.listarTudo();
 
@@ -225,7 +225,8 @@ export class HomeComponent implements OnInit {
   pesquisarEvento(){
     const lowerCaseSearchTerm = this.termoPesquisa.toLowerCase();
     console.log(lowerCaseSearchTerm)
-    this.listaEventos= this.items.filter(item => item.diaSemana.toLowerCase() === lowerCaseSearchTerm || item.nome.toLowerCase() === lowerCaseSearchTerm || item.categoria.toLowerCase() === lowerCaseSearchTerm);
+
+    this.listaEventos = this.items.filter(item => item.diaSemana.toLowerCase() === lowerCaseSearchTerm || item.nome.toLowerCase() === lowerCaseSearchTerm || item.categoria.toLowerCase() === lowerCaseSearchTerm);
     console.log(this.listaEventos)
 
     if(this.listaEventos.length === 0) {

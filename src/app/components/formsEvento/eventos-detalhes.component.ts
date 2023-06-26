@@ -209,6 +209,7 @@ export class EventosDetalhesComponent implements OnInit {
       this.mensagemExcecao = data as Mensagem;
       this.cepInvalido = false;
       this.cepValido = true;
+      this.evento.endereco.cepEvento = this.cep;
 
 
       if (this.evento.endereco.cidade == 'Olinda') {
@@ -227,10 +228,7 @@ export class EventosDetalhesComponent implements OnInit {
   }
 
   criarEvento() {
-    // this.service.criarEvento(this.evento).subscribe(() => {
-    //   this.router.navigate(['home']);
-    //   console.log(this.evento);
-    // });
+
     if (this.evento.nome === '' || this.evento.categoria === '' || this.evento.imagem === '' || this.evento.horarioSaida === '') {
       this.campoObrigatorio = true
       this.toast.error('Campos obrigatórios não foram preenchidos');
@@ -238,6 +236,11 @@ export class EventosDetalhesComponent implements OnInit {
     }
     this.campoObrigatorio = false;
     this.toast.success('Evento foi Cadastrado com sucesso!!');
+    //criando evento
+    this.service.criarEvento(this.evento).subscribe(() => {
+      this.router.navigate(['home']);
+      console.log(this.evento);
+    });
     return true;
     console.log(this.evento);
   }
