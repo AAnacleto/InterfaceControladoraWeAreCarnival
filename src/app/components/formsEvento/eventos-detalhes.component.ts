@@ -184,7 +184,7 @@ export class EventosDetalhesComponent implements OnInit {
   }
 
   formatarDataParaBrasileiro(data: Date): string {
-    const dia = data.getDate().toString().padStart(2, '0');
+    const dia = (data.getDate() + 1).toString().padStart(2, '0');
     const mes = (data.getMonth() + 1).toString().padStart(2, '0');
     const ano = data.getFullYear().toString();
 
@@ -194,13 +194,18 @@ export class EventosDetalhesComponent implements OnInit {
   pegarData() {
     this.data = new Date(this.dataString);
     this.evento.data = this.formatarDataParaBrasileiro(this.data);
-    const day = this.data.getDay();
+    const day = this.data.getDay() + 1;
     const dayOfWeek: any[] = this.diaSemana.filter((d) => d.id === day);
     this.evento.diaSemana = dayOfWeek[0].nome;
     this.evento.diaInt = dayOfWeek[0].id;
+    console.log(this.dataString)
+    console.log(this.data)
+    console.log(this.evento.data)
+    console.log(day)
   }
 
   preencherEndereco() {
+    this.cep = this.evento.endereco.cep;
     this.enderecoService.buscarEndereco(this.cep).subscribe((data) => {
       this.endereco = data as EnderecoApi;
       this.evento.endereco.nomeRua = this.endereco.logradouro;

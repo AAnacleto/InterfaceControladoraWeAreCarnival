@@ -5,7 +5,7 @@ export class Endereco{
   bairro: string = "";
   cidade: string = "";
   pontoReferencia: string = "";
-  //Endereço cep
+  cep: string = "";
   cepEvento: string = "";
 }
 
