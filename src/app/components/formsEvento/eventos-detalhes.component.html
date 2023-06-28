@@ -59,6 +59,8 @@
           </div>
         </div>
 
+
+
         <div class="form-group col-lg-2">
           <label for="data" class="control-label">Categoria*</label>
           <select class="form-control" [(ngModel)]="evento.categoria">
@@ -75,15 +77,22 @@
         <div class="form-group col-lg-2" *ngIf="operacao=='Cadastrar'">
           <label for="data" class="control-label">Data:</label>
           <input type="date" class="form-control" [(ngModel)]="dataString" (blur)="pegarData()"/>
+          <div class="msg-obrigatorio" *ngIf="campoObrigatorio && dataString==''">
+            <p> Campo é Obrigatório</p>
+          </div>
         </div>
         <div class="form-group col-lg-2" *ngIf="operacao=='Detalhar'">
           <label for="data" class="control-label">Data:</label>
           <input type="date" class="form-control" [(ngModel)]="dataString" />
+
         </div>
 
         <div class="form-group col-lg-2">
           <label for="data" class="control-label">Dia da Semana:</label>
           <input type="text" class="form-control" disabled [(ngModel)]="evento.diaSemana" />
+          <div class="msg-obrigatorio" *ngIf="campoObrigatorio && evento.diaSemana ==''">
+            <p> Campo é Obrigatório</p>
+          </div>
        </div>
 
        <div class="form-group col-lg-2">
@@ -92,6 +101,11 @@
           <div class="msg-obrigatorio" *ngIf="campoObrigatorio && evento.horarioSaida ==''">
             <p> Campo é Obrigatório</p>
           </div>
+        </div>
+
+        <div class="form-group col-lg-6">
+          <label for="exampleFormControlTextarea1">Descrição do Evento</label>
+          <textarea class="form-control" id="exampleFormControlTextarea1" rows="4" [(ngModel)]="evento.descricao"></textarea>
         </div>
 
         <!-- <div class="form-group col-lg-2" *ngIf="operacao=='Detalhar'">
@@ -105,96 +119,103 @@
 
         </div> -->
 
-        <div class="form-group col-lg-2">
-          <label for="data" class="control-label">Cep*:</label>
-          <input
-            type="text"
-            class="form-control"
-            [(ngModel)]="evento.endereco.cep"
-            (blur)="preencherEndereco()"
-            maxlength=8
-            />
-            <div class="msg">
-              <p>*Apenas números</p>
-            </div>
-            <div class="msg-erro-cep" *ngIf="cepInvalido">
-              <p> CEP Inválido</p>
-            </div>
-            <div class="msg-sucess-cep" *ngIf="cepValido">
-              <p> CEP Encontrado</p>
-            </div>
-        </div>
 
-
-       <div class="form-group col-lg-6">
-          <label for="data" class="control-label">Endereço:</label>
-          <input
-            type="text"
-            class="form-control"
-            disabled
-            [(ngModel)]="evento.endereco.nomeRua"
-          />
-        </div>
-
-        <div class="form-group col-lg-3">
-          <label for="data" class="control-label">Local do Evento:</label>
-          <input
-            type="text"
-            class="form-control"
-            [(ngModel)]="evento.nomeLocal"
-          />
-        </div>
-
-        <div class="form-group col-lg-1">
-          <label for="data" class="control-label">Número:</label>
-          <input
-            type="text"
-            class="form-control"
-            [(ngModel)]="evento.endereco.numero"
-          />
-        </div>
-        <div class="form-group col-lg-3">
-          <label for="data" class="control-label">Ponto de Referência:</label>
-          <input
-            type="text"
-            class="form-control"
-            [(ngModel)]="evento.endereco.pontoReferencia"
-          />
-        </div>
-        <div class="form-group col-lg-2">
-          <label for="data" class="control-label">Cidade:</label>
-          <input
-            type="text"
-            class="form-control"
-            disabled
-            [(ngModel)]="evento.endereco.cidade"
-          />
-        </div>
-
-        <div class="form-group col-lg-4">
-          <label
-            for="data"
-            class="control-label"
-            disabled="operacao=='Detalhar'"
-            >Polo do Evento:</label
-          >
-           <select class="form-control" [(ngModel)]="evento.polo">
-            <!-- <option selected [ngValue]="">Selecione o Polo</option> -->
-            <option *ngFor="let polo of polos" [ngValue]="polo.nome">{{polo.nome}}</option>
-           </select>
-          <!-- <input type="text" class="form-control" [(ngModel)]="evento.polo" /> -->
-        </div>
-
-        <div class="form-group col-lg-2">
-          <label for="data" class="control-label">Bairro:</label>
-          <input
-            type="text"
-            class="form-control"
-            disabled
-            [(ngModel)]="evento.endereco.bairro"
-          />
-        </div>
       </div>
+
+     <div class="row">
+      <div class="form-group col-lg-2">
+        <label for="data" class="control-label">Cep*:</label>
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="evento.endereco.cep"
+          (blur)="preencherEndereco()"
+          maxlength=8
+          />
+          <div class="msg">
+            <p>*Apenas números</p>
+          </div>
+          <div class="msg-erro-cep" *ngIf="cepInvalido">
+            <p> CEP Inválido</p>
+          </div>
+          <div class="msg-sucess-cep" *ngIf="cepValido">
+            <p> CEP Encontrado</p>
+          </div>
+      </div>
+
+
+     <div class="form-group col-lg-6">
+        <label for="data" class="control-label">Endereço:</label>
+        <input
+          type="text"
+          class="form-control"
+          disabled
+          [(ngModel)]="evento.endereco.nomeRua"
+        />
+      </div>
+
+      <div class="form-group col-lg-4">
+        <label for="data" class="control-label">Local do Evento:</label>
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="evento.nomeLocal"
+        />
+      </div>
+
+      <div class="form-group col-lg-3">
+        <label for="data" class="control-label">Ponto de Referência:</label>
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="evento.endereco.pontoReferencia"
+        />
+      </div>
+
+      <div class="form-group col-lg-1">
+        <label for="data" class="control-label">Número:</label>
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="evento.endereco.numero"
+        />
+      </div>
+
+      <div class="form-group col-lg-2">
+        <label for="data" class="control-label">Cidade:</label>
+        <input
+          type="text"
+          class="form-control"
+          disabled
+          [(ngModel)]="evento.endereco.cidade"
+        />
+      </div>
+
+      <div class="form-group col-lg-4">
+        <label
+          for="data"
+          class="control-label"
+          disabled="operacao=='Detalhar'"
+          >Polo do Evento:</label
+        >
+         <select class="form-control" [(ngModel)]="evento.polo">
+          <!-- <option selected [ngValue]="">Selecione o Polo</option> -->
+          <option *ngFor="let polo of polos" [ngValue]="polo.nome">{{polo.nome}}</option>
+         </select>
+        <!-- <input type="text" class="form-control" [(ngModel)]="evento.polo" /> -->
+      </div>
+
+      <div class="form-group col-lg-2">
+        <label for="data" class="control-label">Bairro:</label>
+        <input
+          type="text"
+          class="form-control"
+          disabled
+          [(ngModel)]="evento.endereco.bairro"
+        />
+      </div>
+
+     </div>
 
       <div class="row">
         <div  class="col-lg-12" *ngIf="operacao == 'Detalhar'">

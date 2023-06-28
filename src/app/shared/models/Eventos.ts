@@ -13,6 +13,7 @@ export class Eventos{
     diaSemana: string = "";
     favoritos: boolean = false;
     diaInt: number = 0;
+    descricao: string = "";
 }
 
 export class Mensagem{

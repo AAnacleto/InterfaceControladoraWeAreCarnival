@@ -244,11 +244,13 @@ export class EventosDetalhesComponent implements OnInit {
 
   criarEvento() {
 
-    if (this.evento.nome === '' || this.evento.categoria === '' || this.evento.imagem === '' || this.evento.horarioSaida === '') {
+    if (this.evento.nome === '' || this.evento.categoria === '' || this.evento.imagem === '' || this.evento.horarioSaida === '' || this.dataString === '') {
       this.campoObrigatorio = true
+      console.log(this.evento);
       this.toast.error('Campos obrigatórios não foram preenchidos');
       return false;
     }
+    console.log(this.evento);
     this.campoObrigatorio = false;
     this.toast.success('Evento foi Cadastrado com sucesso!!');
     //criando evento
@@ -284,6 +286,8 @@ export class EventosDetalhesComponent implements OnInit {
   }
 
   limparTudo() {
+    this.campoObrigatorio = false;
+
     this.evento = new Eventos();
     this.imgUrl = '';
   }
