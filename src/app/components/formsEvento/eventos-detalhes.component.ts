@@ -116,7 +116,7 @@ export class EventosDetalhesComponent implements OnInit {
     }
     if (this.parametroRota != 'new') {
       this.operacao = 'Detalhar';
-      this.dataString = this.formatarData(this.evento.data)
+      // this.dataString = this.formatarData(this.evento.data)
       this.buscarPorId(this.parametroRota);
     }
     console.log(this.parametroRota);
@@ -185,13 +185,13 @@ export class EventosDetalhesComponent implements OnInit {
       });
   }
 
-  formatarDataParaBrasileiro(data: Date): string {
-    const dia = (data.getDate() + 1).toString().padStart(2, '0');
-    const mes = (data.getMonth() + 1).toString().padStart(2, '0');
-    const ano = data.getFullYear().toString();
+  // formatarDataParaBrasileiro(data: Date): string {
+  //   const dia = (data.getDate() + 1).toString().padStart(2, '0');
+  //   const mes = (data.getMonth() + 1).toString().padStart(2, '0');
+  //   const ano = data.getFullYear().toString();
 
-    return `${dia}/${mes}/${ano}`;
-  }
+  //   return `${dia}/${mes}/${ano}`;
+  // }
 
   // formatDateToAmerican(data: Date): string {
   //   const month = (data.getMonth() + 1).toString().padStart(2, '0');
@@ -201,18 +201,18 @@ export class EventosDetalhesComponent implements OnInit {
   //   return `${year}-${month}-${day}`;
   // }
 
-  formatarData(data: string): string {
-    const partes = data.split('/');
-    const dia = partes[0];
-    const mes = partes[1];
-    const ano = partes[2];
+  // formatarData(data: string): string {
+  //   const partes = data.split('/');
+  //   const dia = partes[0];
+  //   const mes = partes[1];
+  //   const ano = partes[2];
 
-    return `${ano}-${mes}-${dia}`;
-  }
+  //   return `${ano}-${mes}-${dia}`;
+  // }
 
   pegarData() {
     this.data = new Date(this.dataString);
-    this.evento.data = this.formatarDataParaBrasileiro(this.data);
+    this.evento.data = this.dataString;
     const day = this.data.getDay() + 1;
     const dayOfWeek: any[] = this.diaSemana.filter((d) => d.id === day);
     this.evento.diaSemana = dayOfWeek[0].nome;
@@ -267,7 +267,6 @@ export class EventosDetalhesComponent implements OnInit {
       console.log(this.evento);
     });
     return true;
-    console.log(this.evento);
   }
 
   editarEvento() {
