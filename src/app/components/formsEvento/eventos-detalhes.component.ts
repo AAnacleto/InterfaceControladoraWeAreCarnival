@@ -116,8 +116,7 @@ export class EventosDetalhesComponent implements OnInit {
     }
     if (this.parametroRota != 'new') {
       this.operacao = 'Detalhar';
-      this.data = new Date(this.dataString);
-      this.evento.data = this.formatDateToAmerican(this.data)
+      this.dataString = this.formatarData(this.evento.data)
       this.buscarPorId(this.parametroRota);
     }
     console.log(this.parametroRota);
@@ -194,12 +193,21 @@ export class EventosDetalhesComponent implements OnInit {
     return `${dia}/${mes}/${ano}`;
   }
 
-  formatDateToAmerican(data: Date): string {
-    const month = (data.getMonth() + 1).toString().padStart(2, '0');
-    const day = data.getDate().toString().padStart(2, '0');
-    const year = data.getFullYear().toString();
+  // formatDateToAmerican(data: Date): string {
+  //   const month = (data.getMonth() + 1).toString().padStart(2, '0');
+  //   const day = data.getDate().toString().padStart(2, '0');
+  //   const year = data.getFullYear().toString();
 
-    return `${year}-${month}-${day}`;
+  //   return `${year}-${month}-${day}`;
+  // }
+
+  formatarData(data: string): string {
+    const partes = data.split('/');
+    const dia = partes[0];
+    const mes = partes[1];
+    const ano = partes[2];
+
+    return `${ano}-${mes}-${dia}`;
   }
 
   pegarData() {
@@ -287,7 +295,6 @@ export class EventosDetalhesComponent implements OnInit {
 
   limparTudo() {
     this.campoObrigatorio = false;
-
     this.evento = new Eventos();
     this.imgUrl = '';
   }
