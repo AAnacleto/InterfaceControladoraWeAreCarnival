@@ -116,6 +116,8 @@ export class EventosDetalhesComponent implements OnInit {
     }
     if (this.parametroRota != 'new') {
       this.operacao = 'Detalhar';
+      this.data = new Date(this.dataString);
+      this.evento.data = this.formatDateToAmerican(this.data)
       this.buscarPorId(this.parametroRota);
     }
     console.log(this.parametroRota);
@@ -164,6 +166,7 @@ export class EventosDetalhesComponent implements OnInit {
     return this.service.buscarPorId(id).subscribe((data) => {
       this.evento = data as Eventos[][0];
       console.log(this.evento);
+      console.log(this.pegarData())
     });
   }
 
@@ -191,6 +194,14 @@ export class EventosDetalhesComponent implements OnInit {
     return `${dia}/${mes}/${ano}`;
   }
 
+  formatDateToAmerican(data: Date): string {
+    const month = (data.getMonth() + 1).toString().padStart(2, '0');
+    const day = data.getDate().toString().padStart(2, '0');
+    const year = data.getFullYear().toString();
+
+    return `${year}-${month}-${day}`;
+  }
+
   pegarData() {
     this.data = new Date(this.dataString);
     this.evento.data = this.formatarDataParaBrasileiro(this.data);
@@ -214,7 +225,6 @@ export class EventosDetalhesComponent implements OnInit {
       this.mensagemExcecao = data as Mensagem;
       this.cepInvalido = false;
       this.cepValido = true;
-      this.evento.endereco.cepEvento = this.cep;
 
 
       if (this.evento.endereco.cidade == 'Olinda') {
